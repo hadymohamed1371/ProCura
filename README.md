@@ -1,16 +1,86 @@
-# React + Vite
+# ProCura
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+ProCura is a React application built with Vite. It currently includes a dashboard and a shared page layout.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [Node.js](https://nodejs.org/) (npm is included)
+- [Git](https://git-scm.com/)
+- [GitHub CLI](https://cli.github.com/) for creating pull requests from the command line (optional)
 
-## React Compiler
+## Get started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Clone the repository, install its dependencies, and start the development server:
 
-## Expanding the Oxlint configuration
+```powershell
+git clone https://github.com/hadymohamed1371/ProCura.git
+cd ProCura
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Vite prints the local URL in the terminal. To check a production build or run the linter:
+
+```powershell
+npm run build
+npm run lint
+```
+
+## Project structure
+
+```text
+ProCura/
+├── index.html
+├── package.json
+├── package-lock.json
+├── vite.config.js
+└── src/
+    ├── App.jsx
+    ├── App.css
+    ├── index.css
+    ├── main.jsx
+    ├── assets/
+    │   ├── icons/
+    │   ├── images/
+    │   └── logos/
+    ├── components/
+    │   ├── Layout/
+    │   │   └── Layout.jsx
+    │   └── Navbar.jsx
+    └── pages/
+        ├── dashboard/
+        │   ├── Dashboard.jsx
+        │   └── Dashboard.css
+        └── profile_info/
+            └── Profile_Info.jsx
+```
+
+- `src/main.jsx` starts the React application.
+- `src/App.jsx` defines the application routes.
+- `src/components/` contains reusable interface components and the shared layout.
+- `src/pages/` contains page-level components.
+- `src/assets/` contains images, logos, and icons.
+
+## Create a branch, push changes, and open a pull request
+
+Run these commands from the repository directory in PowerShell, Command Prompt, or another terminal. Start from the latest `main` branch and replace the example branch name and commit message with ones that describe your changes.
+
+```powershell
+git switch main
+git pull origin main
+git switch -c feature/short-description
+
+# After making your changes:
+git status
+git add .
+git commit -m "Describe your changes"
+git push -u origin feature/short-description
+```
+
+If you have authenticated with GitHub CLI (`gh auth login`), create a pull request targeting `main`:
+
+```powershell
+gh pr create --base main --title "Describe your changes" --body "Summarize what changed and why."
+```
+
+Alternatively, after pushing your branch, open the repository on GitHub and use the prompt to create a pull request. Select `main` as the base branch and your feature branch as the compare branch.
