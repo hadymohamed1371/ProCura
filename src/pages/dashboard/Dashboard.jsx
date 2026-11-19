@@ -17,7 +17,7 @@ export default function Dashboard() {
             <Head_Title 
             title={`Welcome, “name”`}
             pageTitle={true}
-            subtitle="Here is your health summary so far."
+            subtitle={"Here is your health summary so far."}
             logo={Dashboard_Page_Title_logo}
             />
 
