@@ -1,15 +1,17 @@
 import React from 'react'
 
+import "./Layout.css"
+
 import { Outlet } from 'react-router-dom'
 
-import Navbar from '../../../../Procura/src/components/Navbar'
+import Navbar from '../Navbar'
 
 export default function Layout() {
   return (
-    <div>
+    <div className='layout-container'>
         <Navbar />
 
-        <main>
+        <main className='main-content'>
             <Outlet />
         </main>
 

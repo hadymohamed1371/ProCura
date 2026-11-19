@@ -5,6 +5,18 @@
     --color-sky-blue: #559DEB;
     --color-lavander: #A5A2E8;
     --color-mint-green: #72BFA8;
+    --color-head-title: #131F60;
+    --color-head-subtitle: #383573;
+    --color-badge-positive-background: #7EB596;
+    --color-badge-positive-text: #187653;
+    --color-badge-negative-background: #F99CA1;
+    --color-badge-negative-text: #C83D4B;
 
 
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }

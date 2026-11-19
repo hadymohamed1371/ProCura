@@ -1,2 +1,25 @@
 @import '../../App.css';
 
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.dashboard-grid > .section-body {
+    width: 100%;
+    min-width: 0;
+}
+
+.dashboard-grid > .section-body:nth-child(-n + 3) {
+    grid-column: span 2;
+}
+
+.dashboard-grid > .section-body:nth-child(4) {
+    grid-column: span 4;
+}
+
+.dashboard-grid > .section-body:nth-child(5) {
+    grid-column: span 2;
+}
+

@@ -1,0 +1,25 @@
+@import '../App.css';
+
+.badge-container {
+    width: 71px;
+    height: 25px;
+    border-radius: 30px;
+}
+
+.badge-content {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    line-height: 25px;
+}
+
+.positive-badge {
+    background-color: var(--color-badge-positive-background);
+    color: var(--color-badge-positive-text);
+}
+
+.negative-badge {
+    background-color: var(--color-badge-negative-background);
+    color: var(--color-badge-negative-text);
+}
