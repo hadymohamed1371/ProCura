@@ -2,17 +2,18 @@ import React from 'react'
 
 import "./Section.css"
 
-import Head_Title from './Head_Title'
-import Badge from './Badge'
+import Head_Title from '../head_title/Head_Title'
+import Badge from '../badge/Badge'
 
-export default function Section({title, logo, positiveBadgeContent, negativeBadgeContent, children, curve}) {
+export default function Section({title, subtitle, logo, positiveBadgeContent, negativeBadgeContent, curve, children}) {
     return (
         <div className='section-body'>
             <div className="section-content">
-                <Head_Title className='title' 
+                {(title || subtitle || logo) && <Head_Title className='title' 
                 title={title}
+                subtitle={subtitle}
                 logo={logo}
-                />
+                />}
 
                 {(positiveBadgeContent && (
                     <div className="badge">
@@ -26,14 +27,14 @@ export default function Section({title, logo, positiveBadgeContent, negativeBadg
                     </div>
                 ))}
 
-                <div className="">
+                <div className="children">
 
                     {children}
                 
                 </div>
             </div>
 
-            {curve && <img src={curve} className="curve" alt="" />}
+            {curve && <img src={curve} className="curve" />}
         </div>
     )
 }

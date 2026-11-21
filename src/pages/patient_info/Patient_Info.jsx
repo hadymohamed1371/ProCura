@@ -1,27 +1,70 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import './Patient_Info.css'
-import Section from '../../components/Section'
-import Head_Title from '../../components/Head_Title'
-import Patient_Info_logo from '../../assets/icons/Patient_Info_logo.svg'
+import Disease_Navbar from '../../components/disease_navbar/Disease_Navbar'
+import Section from '../../components/section/Section'
+import Button from '../../components/button/Button'
+import Head_Title from '../../components/head_title/Head_Title'
+import General_Health_Input from './sections/General_Health_Input'
+import { Outlet, useNavigate } from 'react-router-dom'
 
-export default function Patient_Info() {
+export default function Patient_Info({ onSave }) {
+  const navigate = useNavigate()
+  const [formValues, setFormValues] = useState({})
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setFormValues((currentValues) => ({
+      ...currentValues,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    onSave?.(formValues)
+    navigate('/patient-info/cardiovascular')
+  }
+
   return (
-    <div className=''>
-
-        <Head_Title 
-        title="Patient Info"
-        pageTitle={true}
-        subtitle="Enter your health data."
-        logo={Patient_Info_logo}
+    <div className='patient-info-container'>
+        <Disease_Navbar
+        routeStart={'/patient-info'}
         />
 
-        <Section 
-        title="Cardiovacular"
-        >
+        <form className="patient-info-form" method='POST' onSubmit={handleSubmit}>
+            <div className="patient-info-grid">
+                <div className="patient-info-top-row">
+                    <div className="patient-info-dynamic-cell">
+                        <Outlet context={{formValues, handleInputChange}} />
+                    </div>
 
-        </Section>
-        
+                    <General_Health_Input
+                    formValues={formValues}
+                    onInputChange={handleInputChange}
+                    />
+                </div>
+
+                <div className="patient-info-save-row">
+                    <Section>
+                        <div className="patient-info-save-content">
+                            <div className="save-container">
+                                <Head_Title
+                                title={'Save the new data:'}
+                                subtitle={'The new data will contribute to the predictions and your health tracking.'}
+                                />
+                            </div>
+
+                            <Button
+                            type="submit"
+                            buttonContent={'Save Data'}
+                            />
+                            
+                        </div>
+                    </Section>
+                </div>
+            </div>
+        </form>
     </div>
   )
 }

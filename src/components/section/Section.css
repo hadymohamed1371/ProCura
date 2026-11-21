@@ -1,4 +1,4 @@
-@import "../App.css";
+@import "../../App.css";
 
 .section-body {
     width: fit-content;
@@ -11,6 +11,10 @@
 .section-content {
     position: relative;
     padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .badge {

@@ -1,1 +1,146 @@
 @import '../../App.css';
+
+.patient-info-container,
+.patient-info-form {
+    width: 100%;
+}
+
+.patient-info-grid {
+    /* Adjust this value to change the vertical gap between the top and save rows. */
+    --patient-info-row-gap: 12px;
+
+    display: grid;
+    grid-template-areas:
+        "top"
+        "save";
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--patient-info-row-gap);
+}
+
+.patient-info-top-row {
+    --patient-info-disease-cell-width: max-content;
+    --patient-info-general-cell-width: max-content;
+    --patient-info-column-gap: 12px;
+
+    grid-area: top;
+    display: flex;
+    align-items: stretch;
+    column-gap: var(--patient-info-column-gap);
+    min-width: 0;
+}
+
+.patient-info-dynamic-cell {
+    flex: 0 1 var(--patient-info-disease-cell-width);
+    min-width: 0;
+    display: flex;
+}
+
+.patient-info-general-cell {
+    flex: 0 1 var(--patient-info-general-cell-width);
+    min-width: 0;
+    display: flex;
+}
+
+.patient-info-save-row {
+    grid-area: save;
+    min-width: 0;
+    width: 100%;
+}
+
+.patient-info-dynamic-cell > .section-body,
+.patient-info-general-cell > .section-body {
+    width: 100%;
+    flex: 1;
+}
+
+.patient-info-save-row > .section-body {
+    width: 100%;
+}
+
+.patient-info-save-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.save-container {
+    flex: 1;
+    min-width: 0;
+}
+
+.input-fields-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-container {
+    display: flex;
+    gap: 40px;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-blue);
+}
+
+.input-field {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    width: 300px;
+}
+
+.mini-input-field {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    width: 145px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.mini-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.description {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: black;
+    margin-top: 10px;
+}
+
+.save-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .patient-info-top-row {
+        flex-direction: column;
+        row-gap: var(--patient-info-column-gap);
+    }
+
+    .patient-info-dynamic-cell,
+    .patient-info-general-cell {
+        flex-basis: auto;
+        width: 100%;
+    }
+}

@@ -1,8 +1,12 @@
-@import '../App.css';
+@import '../../App.css';
 
 .badge-container {
-    width: 71px;
-    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 0 10px;
+    height: auto;
     border-radius: 30px;
 }
 
@@ -12,6 +16,7 @@
     font-weight: normal;
     text-align: center;
     line-height: 25px;
+    margin-bottom: -3px;
 }
 
 .positive-badge {
@@ -22,4 +27,9 @@
 .negative-badge {
     background-color: var(--color-badge-negative-background);
     color: var(--color-badge-negative-text);
+}
+
+.neutral-badge {
+    background-color: var(--color-badge-neutral-background);
+    color: var(--color-badge-neutral-text);
 }

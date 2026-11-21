@@ -1,5 +1,3 @@
-
-
 :root {
     --color-blue: #3478C9;
     --color-sky-blue: #559DEB;
@@ -7,11 +5,12 @@
     --color-mint-green: #72BFA8;
     --color-head-title: #131F60;
     --color-head-subtitle: #383573;
-    --color-badge-positive-background: #7EB596;
-    --color-badge-positive-text: #187653;
-    --color-badge-negative-background: #F99CA1;
-    --color-badge-negative-text: #C83D4B;
-
+    --color-badge-positive-background: #93C8AC;
+    --color-badge-positive-text: #0B3B28;
+    --color-badge-negative-background: #F9A8AE;
+    --color-badge-negative-text: #8F1D28;
+    --color-badge-neutral-background: #637381;
+    --color-badge-neutral-text: white;
 
 }
 

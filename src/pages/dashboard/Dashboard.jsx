@@ -1,8 +1,9 @@
 import React from 'react'
+import { Outlet, useLocation } from 'react-router-dom'
 
 import './Dashboard.css'
-import Head_Title from '../../components/Head_Title'
-import Dashboard_Page_Title_logo from '../../assets/icons/Dashboard_Page_Title_logo.svg'
+
+import Disease_Navbar from '../../components/disease_navbar/Disease_Navbar'
 
 import Blood_Pressure from './sections/Blood_Pressure'
 import Heart_Rate from './sections/Heart_Rate'
@@ -11,25 +12,27 @@ import Health_Trends from './sections/Health_Trends'
 import Overall_Health from './sections/Overall_Health'
 
 export default function Dashboard() {
+    const { pathname } = useLocation()
+    const isGeneralPage = pathname === '/' || pathname === '/dashboard'
+
     return (
         <div className='dashboard-body'>
 
-            <Head_Title 
-            title={`Welcome, “name”`}
-            pageTitle={true}
-            subtitle={"Here is your health summary so far."}
-            logo={Dashboard_Page_Title_logo}
+            <Disease_Navbar
+            routeStart={'/dashboard'}
             />
 
-            <div className="dashboard-grid">
-            
-                <Blood_Pressure />
-                <Heart_Rate />
-                <Blood_Glucose />
-                <Health_Trends />
-                <Overall_Health />
-
-            </div>
+            {isGeneralPage ? (
+                <div className="dashboard-grid">
+                    <Blood_Pressure />
+                    <Heart_Rate />
+                    <Blood_Glucose />
+                    <Health_Trends />
+                    <Overall_Health />
+                </div>
+            ) : (
+                <Outlet />
+            )}
         </div>
     )
 }

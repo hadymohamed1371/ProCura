@@ -1,22 +1,15 @@
 import React from 'react'
 
-import Section from '../../../components/Section'
-import Vital from '../../../components/Vital'
+import Section from '../../../components/section/Section'
+import Vital from '../../../components/vital/Vital'
 
 export default function Health_Trends() {
     return (
         
         <Section
-        title="Blood Pressure"
-        // logo={}
-        positiveBadgeContent="Normal"
-        // curve={}
+        title="Health Trends"
         >
-            <Vital 
-            value={"120/90"}
-            unit={"mmHg"}
-            normalRange={"90/60 - 120/80 mmHg"}
-            />
+
         </Section>
 
     )

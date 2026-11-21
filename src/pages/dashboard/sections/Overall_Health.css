@@ -1,0 +1,32 @@
+@import '../../../App.css';
+
+.overall-health-container {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.overall-health-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-name .container {
+    margin-bottom: 0;
+}
+
+.item-name .title-content {
+    margin: 0;
+}
+
+.item-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4px 12px;
+
+    background-color: #EEF0FF;
+    border-radius: 20px;
+}

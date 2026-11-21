@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Section from '../../../components/Section'
-import Vital from '../../../components/Vital'
+import Section from '../../../components/section/Section'
+import Vital from '../../../components/vital/Vital'
 import Blood_Pressure_icon from '../../../assets/icons/Blood_Pressure_icon.svg'
 import Blood_Pressure_Card_Curve from '../../../assets/images/Blood_Pressure_Card_Curve.svg'
 
@@ -17,7 +17,8 @@ export default function Blood_Pressure() {
             <Vital 
             value={"120/90"}
             unit={"mmHg"}
-            normalRange={"90/60 - 120/80 mmHg"}
+            // normalMin={"90/60"}
+            normalMax={"120/80"}
             />
         </Section>
 

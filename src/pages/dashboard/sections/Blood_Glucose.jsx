@@ -1,21 +1,24 @@
 import React from 'react'
 
-import Section from '../../../components/Section'
-import Vital from '../../../components/Vital'
+import Section from '../../../components/section/Section'
+import Vital from '../../../components/vital/Vital'
+import Blood_Glucose_icon from '../../../assets/icons/Blood_Glucose_icon.svg'
+import Blood_Glucose_Card_Curve from '../../../assets/images/Blood_Glucose_Card_Curve.svg'
 
 export default function Blood_Glucose() {
     return (
         
         <Section
-        title="Blood Pressure"
-        // logo={}
+        title="Blood Glucose"
+        logo={Blood_Glucose_icon}
         positiveBadgeContent="Normal"
-        // curve={}
+        curve={Blood_Glucose_Card_Curve}
         >
             <Vital 
-            value={"120/90"}
-            unit={"mmHg"}
-            normalRange={"90/60 - 120/80 mmHg"}
+            value={"100"}
+            unit={"mg/dL"}
+            normalMin={"80"}
+            normalMax={"140"}
             />
         </Section>
 

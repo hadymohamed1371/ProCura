@@ -1,4 +1,4 @@
-@import '../App.css';
+@import '../../App.css';
 
 .vital-content {
     display: flex;
@@ -15,14 +15,14 @@
 
 .value {
     font-family: "Inter", sans-serif;
-    font-size: 40px;
+    font-size: 43px;
     font-weight: bold;
     color: var(--color-head-title);
 }
 
 .unit {
     font-family: "Inter", sans-serif;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: normal;
     color: var(--color-head-subtitle);
 }
