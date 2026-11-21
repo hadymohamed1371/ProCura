@@ -1,84 +1,50 @@
 @import "../../../App.css";
-@import "../Settings.css";
-
-.preferences-container,
-.preferences-container * {
-  font-family: 'Inter', sans-serif;
-}
-
-.preferences-container {
-  background-color: #ffffff;
-  border-radius: 24px;
-  padding: 28px 36px 32px;
-  box-shadow: 0 4px 18px rgba(15, 28, 78, 0.04);
-}
-
-.preferences-title {
-  margin: 0 0 24px;
-  font-size: 24px;
-  font-weight: 700;
-  color: #0b1648;
-  line-height: 1.25;
-}
 
 .preferences-list {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 360px;
+  font-family: "Inter", sans-serif;
 }
 
 .preferences-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: 24px;
 }
 
 .preferences-label-group {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .preferences-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #3678c9;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
   flex-shrink: 0;
+  
 }
 
 .preferences-label {
-  font-size: 20px;
-  font-weight: 600;
-  color: #3678c9;
-  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #4180C7;
 }
 
-.preferences-control {
-  width: 310px;
-}
 
 .preferences-select {
-  width: 100%;
-  height: 46px;
-  padding: 0 42px 0 18px;
-  font-size: 15px;
-  font-weight: 400;
-  color: #7c8494;
+  min-width: 140px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-head-subtitle);
   background-color: #ffffff;
-  border: 1.5px solid #8a9099;
-  border-radius: 14px;
-  outline: none;
+  color: var(--color-head-title);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
   cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236c7380' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  transition: border-color 0.2s ease;
-}
-
-.preferences-select:focus {
-  border-color: #3678c9;
 }
