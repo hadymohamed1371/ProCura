@@ -1,9 +1,19 @@
-# Button
+# Button.jsx
 
-`Button` is a reusable button component with configurable content, appearance,
-native button type, disabled state, and click handler.
+## Folder Structure
 
-## Basic usage
+```text
+src/
+└── components/
+    └── button/
+        ├── Button.jsx
+        ├── Button.css
+        └── Button_README.md
+```
+
+Button is a reusable button component with configurable content, logo, appearance, native button type, disabled state, and click handler.
+
+## Basic Usage
 
 ```jsx
 import Button from './components/button/Button'
@@ -12,7 +22,8 @@ function Example() {
   return (
     <Button
       buttonContent="Click me"
-      actionOnClick={() => console.log('Clicked')}
+      logo={editIcon}
+      actionOnClick={handleClick}
     />
   )
 }
@@ -23,23 +34,25 @@ function Example() {
 | Prop | Type | Default | Required | Description |
 | :--- | :--- | :--- | :--- | :--- |
 | `buttonContent` | `React.ReactNode` | — | Yes | Content displayed inside the button. |
+| `logo` | `string` | — | No | Image source displayed before the button content. |
 | `appearance` | `string` | `"default"` | No | `"default"` uses the blue style. Any other value uses the grey style. |
 | `disabled` | `boolean` | `false` | No | Disables the button and makes it semi-transparent, regardless of appearance. |
 | `type` | `"button" \| "submit" \| "reset"` | `"button"` | No | Native HTML button type, controlling its behavior in a form. |
 | `actionOnClick` | `function` | — | No | Callback invoked when the button is clicked. |
 
-## Examples
+## Examples / Variations
 
-### Blue button with a custom click action
+**Blue button with a custom click action and logo**
 
 ```jsx
 <Button
+  logo={editIcon}
   buttonContent="Open profile"
   actionOnClick={openProfile}
 />
 ```
 
-### Grey button
+**Grey button**
 
 Any `appearance` value other than `"default"` selects the grey style:
 
@@ -50,7 +63,7 @@ Any `appearance` value other than `"default"` selects the grey style:
 />
 ```
 
-### Form submit button
+**Form submit button**
 
 ```jsx
 <form onSubmit={handleSubmit}>
@@ -61,7 +74,7 @@ Any `appearance` value other than `"default"` selects the grey style:
 </form>
 ```
 
-### Disabled button
+**Disabled button**
 
 The disabled state applies to either appearance:
 
@@ -73,13 +86,17 @@ The disabled state applies to either appearance:
 />
 ```
 
-## Notes
+## Notes & Caveats
 
-- `type` and `actionOnClick` are separate props and can be used together. `type`
-  controls the button's native form behavior; `actionOnClick` handles a click.
-- Use `type="button"` for a custom click action inside a form when it should not
-  submit the form. This is the default.
-- Use `type="submit"` when the button should submit its containing form. The
-  form's `onSubmit` handler is responsible for handling that submission.
-- A submit button does not, by itself, send data to a backend.
+### Supported Cases
+
 - `buttonContent` accepts any renderable React content, not only a string.
+- `logo` is optional and renders before `buttonContent`.
+- `type` defaults to `"button"`, so a button with a custom click action does not submit a containing form by default.
+- Use `type="submit"` or `type="reset"` when the button should perform that native form behavior.
+
+### Caveats
+
+- `type` and `actionOnClick` can be used together; if they are, the native form behavior and click handler may both run.
+- A submit button does not, by itself, send data to a backend. The form's `onSubmit` handler is responsible for handling submission.
+- Any `appearance` value other than `"default"` selects the grey style.

@@ -2,25 +2,81 @@
 
 
 
- .profile-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    "profile profile"
-    "personal health";
-  
-  /* align-items: stretch; */
+.profile-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+        "profile profile"
+        "personal health";
+    gap: 12px;
+
+    font-family: 'Inter', sans-serif;
 }
 
-.profile-container {
-  grid-area: profile;
+.profile-grid-card {
+    grid-area: profile;
 }
 
-.personal-info-container {
-  grid-area: personal;
+.profile-grid-personal {
+    grid-area: personal;
 }
 
-.health-info-container {
-  grid-area: health;
+.profile-grid-health {
+    grid-area: health;
+}
+
+.profile-grid-card,
+.profile-grid-personal,
+.profile-grid-health {
+    width: 100%;
+    min-width: 0;
+}
+
+.profile-grid .section-body {
+    width: 100%;
 }
  
+
+.personal-info-container, .health-info-container{
+    display:grid;
+    gap: 40px;
+    margin: 10px;
+}
+
+.personal-section{
+    width: 100%;
+    height: 100%;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.info-item span {
+    color:var(--color-blue);
+    font-size: 18px;
+    font-weight:bold;
+}
+
+.info-item p {
+    color:#A9BBD9;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.info-value{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:30px;
+    margin-left: 5px;
+}
+
+.info-icon {
+    width: 30px;
+    height: 30px;
+}

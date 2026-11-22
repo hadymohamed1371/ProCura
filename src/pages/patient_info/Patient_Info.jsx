@@ -4,27 +4,26 @@ import './Patient_Info.css'
 import Disease_Navbar from '../../components/disease_navbar/Disease_Navbar'
 import Section from '../../components/section/Section'
 import Button from '../../components/button/Button'
-import Head_Title from '../../components/head_title/Head_Title'
 import General_Health_Input from './sections/General_Health_Input'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 export default function Patient_Info({ onSave }) {
-  const navigate = useNavigate()
-  const [formValues, setFormValues] = useState({})
+    const navigate = useNavigate()
+    const [formValues, setFormValues] = useState({})
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
-    setFormValues((currentValues) => ({
-      ...currentValues,
-      [name]: value,
-    }))
-  }
+    const handleInputChange = (event) => {
+        const { name, value } = event.target
+        setFormValues((currentValues) => ({
+        ...currentValues,
+        [name]: value,
+        }))
+    }
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    onSave?.(formValues)
-    navigate('/patient-info/cardiovascular')
-  }
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        onSave?.(formValues)
+        navigate('/patient-info/cardiovascular')
+    }
 
   return (
     <div className='patient-info-container'>
@@ -46,15 +45,12 @@ export default function Patient_Info({ onSave }) {
                 </div>
 
                 <div className="patient-info-save-row">
-                    <Section>
+                    <Section
+                    title={'Save the new data:'}
+                    subtitle={'The new data will contribute to the predictions and your health tracking.'}
+                    >
                         <div className="patient-info-save-content">
-                            <div className="save-container">
-                                <Head_Title
-                                title={'Save the new data:'}
-                                subtitle={'The new data will contribute to the predictions and your health tracking.'}
-                                />
-                            </div>
-
+                            
                             <Button
                             type="submit"
                             buttonContent={'Save Data'}

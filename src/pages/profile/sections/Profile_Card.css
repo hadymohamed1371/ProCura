@@ -1,66 +1,66 @@
 @import '../../../App.css';
 @import '../Profile.css';
 
-.profile-container {
-  background-color: white;
-    width: 93%;
-  display: flex;
-  height: 200px;
-  border-radius: 20px;
-  align-items: center;
-  padding: 15px;
-  margin: 20px ;
-  box-sizing: border-box;
+.profile-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 18px 20px;
+}
 
-}
 .photo-container {
-  margin: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.photo-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
 .photo-container img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .patient-details-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    gap: 15px;
+}
+
+.email-location {
+    display: flex;
+    gap: 20px;
 }
 
 .patient-name {
-  margin: 0;
-  font-size: 30px;
-  color: #383573;
+    margin: 0;
+    font-size: 40px;
+    color: #383573;
+    font-weight: 500;
 }
 
 .patient-email {
-  color: #383573;
-  margin: 0;
+    color: #383573;
+    font-weight: 300;
+    margin: 0;
 }
 
 .patient-location {
-  color: #2e2d2d;
-  margin: 0;
-  text-align: center;
-  
+    color: #383573;
+    font-weight: 300;
+    margin: 0;  
 }
 
 .profile-button {
-  margin-left: auto;
+    margin: 0 20px 0 auto;
 }
 
-.profile-button button {
-  padding: 10px 20px;
-  border: 1px solid var(--color-sky-blue);
-  border-radius: 10px;
-  background-color: var(--color-sky-blue);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}

@@ -41,6 +41,7 @@ function Example() {
 | `logo` | `string` | — | No | Adds a logo/icon for the title of the page/section. |
 
 ## Examples / Variations
+
 ```jsx
     // A page title with a subtitle and a logo
     <Head_Title 
@@ -61,6 +62,13 @@ function Example() {
     <Head_Title 
     title={'Profile'}
     />
+
+    // A page title with only a logo
+    <Head_Title
+    title={'Profile'}
+    pageTitle={true}
+    logo={Profile_Page_Title_logo}
+    />
 ```
 
 ## Notes & Caveats
@@ -74,21 +82,5 @@ function Example() {
 ### Caveats
 - Provide `title` for a meaningful heading. Although the component does not enforce it, omitting `title` leaves an empty title element.
 - `pageTitle` changes the title, subtitle, and logo sizing; it does not add a subtitle or logo automatically.
-
-### Prefered Prop Combinations
-If these props were passed, it will give:
-- `title`, `pageTitle`, `subtitle`, `logo`: A page title with a subtitle and a logo.
-- `title`, `pageTitle`, `subtitle`: A page title with only a subtitle.
-- `title`, `pageTitle`, `logo`: A page title with only a logo.
-- `title`, `subtitle`, `logo`: A section title with a subtitle and a logo.
-- `title`, `subtitle`: A section title with only a subtitle.
-- `title`, `logo`: A section title with only a logo.
-- `title`: A section title without subtitle and a logo.
-
-### Prop Combinations To Avoid
-- `pageTitle`, `subtitle`, `logo`: A large subtitle and a logo.
-- `subtitle`, `logo`: A small subtitle and a logo.
-- `pageTitle`, `subtitle`: A large subtitle.
-- `pageTitle`, `logo`: A large logo.
-- `subtitle`: A small subtitle.
-- `logo`: A small logo.
+- Include `title` in every usage. Add `subtitle` and/or `logo` alongside it as needed.
+- `pageTitle`, `subtitle`, or `logo` without `title` are not meaningful combinations; the component does not enforce required props.
