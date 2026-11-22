@@ -25,6 +25,21 @@ function Example() {
 }
 ```
 
+## Props
+
+Navbar does not accept props; its labels, icons, and destinations are defined within the component.
+
+| Prop | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| — | — | — | — | This component has no configurable props. |
+
+## Examples / Variations
+
+```jsx
+// Render the application's navigation bar.
+<Navbar />
+```
+
 ## Notes & Caveats
 
 ### Supported Cases

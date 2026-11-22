@@ -8,12 +8,12 @@ import Profile_Alcohol_Health from "../../../assets/icons/Profile_Alcohol_Health
 import Profile_Medical_Health from "../../../assets/icons/Profile_Medical_Health.svg"
 
 export default function HealthLifeStyle() {
-  const [profile, setProfile] = useState({
- activityLevel: "Moderate",
-  smokingStatus: "No",
-  alcoholStatus:"No",
-  medicalCondition: "None",
-});
+    const [profile, setProfile] = useState({
+        activityLevel: "Moderate",
+        smokingStatus: "No",
+        alcoholStatus:"No",
+        medicalCondition: "None",
+    });
 
 useEffect(() => {
   const savedProfile = localStorage.getItem("profileData");
@@ -22,44 +22,43 @@ useEffect(() => {
     setProfile(JSON.parse(savedProfile));
   }
 }, []);
-  return (
-     <div className='health-section'>
-    <Section title="Health & LifeSyle">
-     <div className='health-info-container'>
-        <div className="info-item2">
-              <span>Activity Level</span>
-             <div className="info-value2">
-    <img src={Profile_ActivityLevel} alt="ActivityLevel" />
-     <p>{profile.activityLevel}</p>
-  </div>
-            </div>
-    
-            <div className="info-item2">
-              <span>Smoking</span>
-               <div className="info-value2">
-    <img src={Profile_Smoking_Health} alt="Smoking" />
-     <p>{profile.smokingStatus}</p>
-  </div>
-            </div>
-    
-            <div className="info-item2">
-              <span>Alcohol</span>
-                <div className="info-value2">
-    <img src={Profile_Alcohol_Health} alt="Smoking" />
-     <p>{profile.smokingStatus}</p>
-  </div>
-            </div>
-    
-            <div className="info-item2">
-              <span>Medical Conditions </span>
-                <div className="info-value2">
-    <img src={Profile_Medical_Health} alt="Medical Conditions" />
-     <p>{profile.medicalCondition}</p>
-  </div>
-            </div>
-     </div>
-    
-    </Section>
-      </div>
-  )
+    return (
+         <div className='health-section'>
+            <Section title="Health & LifeSyle">
+                <div className='health-info-container'>
+                    <div className="info-item">
+                        <span>Activity Level</span>
+                        <div className="info-value">
+                                <img src={Profile_ActivityLevel} alt="ActivityLevel" className='info-icon' />
+                                <p>{profile.activityLevel}</p>
+                            </div>
+                        </div>
+                
+                        <div className="info-item">
+                        <span>Smoking</span>
+                            <div className="info-value">
+                                <img src={Profile_Smoking_Health} alt="Smoking" className='info-icon' />
+                                <p>{profile.smokingStatus}</p>
+                            </div>
+                        </div>
+                
+                        <div className="info-item">
+                        <span>Alcohol</span>
+                            <div className="info-value">
+                                <img src={Profile_Alcohol_Health} alt="Alcohol" className='info-icon' />
+                                <p>{profile.alcoholStatus}</p>
+                            </div>
+                        </div>
+                
+                        <div className="info-item">
+                        <span>Medical Conditions </span>
+                            <div className="info-value">
+                                <img src={Profile_Medical_Health} alt="Medical Conditions" className='info-icon' />
+                                <p>{profile.medicalCondition}</p>
+                            </div>
+                        </div>
+                </div>
+            </Section>
+        </div>
+    )
 }

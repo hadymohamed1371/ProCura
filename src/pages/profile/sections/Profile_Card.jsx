@@ -1,44 +1,55 @@
 import React from 'react'
 import "./Profile_Card.css";
-import Section from '../../../components/section/Section';
+
 import Button from "../../../components/button/Button.jsx"
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import Pen from '../../../assets/icons/Pen.svg'
 
 
 export default function Profile_Card() {
 
-  const [profile, setProfile] = useState({
-    name: "Name",
-    email: "example@gmail.com",
-    location: "Alexandria",
-    image: "",
-  });
+    const navigate = useNavigate()
 
-  useEffect(() => {
-    const savedProfile = localStorage.getItem("profileData");
+    const [profile, setProfile] = useState({
+        name: "Name",
+        email: "example@gmail.com",
+        location: "Alexandria, Egypt",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQ4xQ1zl6oBSSZ_rOVgiRl4SVgqIS06E_sZcz-kGB4oA&s", 
+    });
 
-    if (savedProfile) {
-      setProfile(JSON.parse(savedProfile));
-    }
-  }, []);
+    useEffect(() => {
+        const savedProfile = localStorage.getItem("profileData");
+
+        if (savedProfile) {
+        setProfile(JSON.parse(savedProfile));
+        }
+    }, []);
 
   return (
-    <div className="profile-container">
+    <div className="profile-card-container">
+        <div className="photo-details-container">
+            <div className="photo-container">
+                <img src={profile.image} alt="patient-photo" />
+            </div>
 
-      <div className="photo-container">
-        <img src={profile.image} alt="patient-photo" />
-      </div>
+            <div className="patient-details-container">
+                <p className="patient-name">{profile.name}</p>
+                <div className="email-location">
+                    <p className="patient-email">{profile.email}</p>
+                    {'—'}
+                    <p className="patient-location">{profile.location}</p>
+                </div>
+            </div>
+        </div>
 
-      <div className="patient-details-container">
-        <h1 className="patient-name">{profile.name}</h1>
-        <p className="patient-email">{profile.email}</p>
-        <p className="patient-location">{profile.location}</p>
-      </div>
-
-      <div className="profile-button">
-        <Button buttonContent="Edit Profile" />
-      </div>
-
+        <div className="profile-button">
+            <Button 
+            buttonContent={"Edit Profile"}
+            logo={Pen}
+            actionOnClick={() => navigate('/profile/edit')}
+            />
+        </div>
     </div>
   );
 }

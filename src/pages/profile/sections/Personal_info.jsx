@@ -26,35 +26,35 @@ useEffect(() => {
 <Section title="Personal Information">
  <div className='personal-info-container'>
     <div className="info-item">
-          <span>Date of Birth</span>
+        <span>Date of Birth</span>
         <div className="info-value">
-    <img src={Profile_Date} alt="Date" />
-      <p>{profile.dateOfBirth}</p>
-  </div>
+            <img src={Profile_Date} alt="Date" className='info-icon' />
+            <p>{profile.dateOfBirth}</p>
+        </div>
         </div>
 
         <div className="info-item">
-          <span>Gender</span>
+        <span>Gender</span>
          <div className="info-value">
-    <img src={Profile_Gender} alt="Gender" />
-    <p>{profile.gender}</p>
-  </div>
+            <img src={Profile_Gender} alt="Gender" className='info-icon' />
+            <p>{profile.gender}</p>
+        </div>
         </div>
 
         <div className="info-item">
-          <span>Height</span>
+        <span>Height</span>
          <div className="info-value">
-    <img src={Profile_Height} alt="Height" />
-     <p>{profile.height} cm</p>
-  </div>
+            <img src={Profile_Height} alt="Height" className='info-icon' />
+            <p>{profile.height} cm</p>
+        </div>
         </div>
 
         <div className="info-item">
-          <span>Weight</span>
+        <span>Weight</span>
          <div className="info-value">
-    <img src={Profile_Weight} alt="Weight" />
-   <p>{profile.weight} kg</p>
-  </div>
+            <img src={Profile_Weight} alt="Weight" className='info-icon' />
+            <p>{profile.weight} kg</p>
+        </div>
         </div>
  </div>
 

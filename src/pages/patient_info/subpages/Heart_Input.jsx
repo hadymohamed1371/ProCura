@@ -17,8 +17,8 @@ export default function Heart_Input() {
                     </div>
                     <div className="input-container">
                         <div className="label-input">
-                            <label htmlFor="cardiovascular-parameter2" className='input-label'>Parameter 2:</label>
-                            <input type="text" id="cardiovascular-parameter2" name="cardiovascular.parameter2" placeholder='Enter the parameter 2' className='input-field' value={formValues['cardiovascular.parameter2'] ?? ''} onChange={handleInputChange} />
+                            <label htmlFor="Heart-parameter2" className='input-label'>Parameter 2:</label>
+                            <input type="text" id="Heart-parameter2" name="Heart.parameter2" placeholder='Enter the parameter 2' className='input-field' value={formValues['Heart.parameter2'] ?? ''} onChange={handleInputChange} />
                         </div>
                         <p className="description">
                             Description for Parameter 2
@@ -26,8 +26,8 @@ export default function Heart_Input() {
                     </div>
                     <div className="input-container">
                         <div className="label-input">
-                            <label htmlFor="cardiovascular-parameter3" className='input-label'>Parameter 3:</label>
-                            <input type="text" id="cardiovascular-parameter3" name="cardiovascular.parameter3" placeholder='Enter the parameter 3' className='input-field' value={formValues['cardiovascular.parameter3'] ?? ''} onChange={handleInputChange} />
+                            <label htmlFor="Heart-parameter3" className='input-label'>Parameter 3:</label>
+                            <input type="text" id="Heart-parameter3" name="Heart.parameter3" placeholder='Enter the parameter 3' className='input-field' value={formValues['Heart.parameter3'] ?? ''} onChange={handleInputChange} />
                         </div>
                         <p className="description">
                             Description for Parameter 3
@@ -35,8 +35,8 @@ export default function Heart_Input() {
                     </div>
                     <div className="input-container">
                         <div className="label-input">
-                            <label htmlFor="cardiovascular-parameter4" className='input-label'>Parameter 4:</label>
-                            <input type="text" id="cardiovascular-parameter4" name="cardiovascular.parameter4" placeholder='Enter the parameter 4' className='input-field' value={formValues['cardiovascular.parameter4'] ?? ''} onChange={handleInputChange} />
+                            <label htmlFor="Heart-parameter4" className='input-label'>Parameter 4:</label>
+                            <input type="text" id="Heart-parameter4" name="Heart.parameter4" placeholder='Enter the parameter 4' className='input-field' value={formValues['Heart.parameter4'] ?? ''} onChange={handleInputChange} />
                         </div>
                         <p className="description">
                             Description for Parameter 4

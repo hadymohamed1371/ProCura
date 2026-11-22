@@ -60,13 +60,7 @@
 .patient-info-save-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.save-container {
-    flex: 1;
-    min-width: 0;
+    justify-content: center;
 }
 
 .input-fields-container {
@@ -118,23 +112,12 @@
     gap: 10px;
 }
 
-
 .description {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 300;
     color: black;
     margin-top: 10px;
-}
-
-
-
-
-
-.save-title-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 @media (max-width: 900px) {

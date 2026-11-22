@@ -10,8 +10,8 @@ export default function Liver_Input() {
              <div className="input-fields-container">
                     <div className="input-container">
                         <div className="label-input">
-                            <label htmlFor="cardiovascular-parameter1" className='input-label'>Parameter 1:</label>
-                            <input type="text" id="cardiovascular-parameter1" name="cardiovascular.parameter1" placeholder='Enter the parameter 1' className='input-field' value={formValues['cardiovascular.parameter1'] ?? ''} onChange={handleInputChange} />
+                            <label htmlFor="Liver-parameter1" className='input-label'>Parameter 1:</label>
+                            <input type="text" id="Liver-parameter1" name="Liver.parameter1" placeholder='Enter the parameter 1' className='input-field' value={formValues['Liver.parameter1'] ?? ''} onChange={handleInputChange} />
                         </div>
                         <p className="description">
                             Description for Parameter 1
@@ -19,8 +19,8 @@ export default function Liver_Input() {
                     </div>
                     <div className="input-container">
                         <div className="label-input">
-                            <label htmlFor="cardiovascular-parameter2" className='input-label'>Parameter 2:</label>
-                            <input type="text" id="cardiovascular-parameter2" name="cardiovascular.parameter2" placeholder='Enter the parameter 2' className='input-field' value={formValues['cardiovascular.parameter2'] ?? ''} onChange={handleInputChange} />
+                            <label htmlFor="Liver-parameter2" className='input-label'>Parameter 2:</label>
+                            <input type="text" id="Liver-parameter2" name="Liver.parameter2" placeholder='Enter the parameter 2' className='input-field' value={formValues['Liver.parameter2'] ?? ''} onChange={handleInputChange} />
                         </div>
                         <p className="description">
                             Description for Parameter 2
@@ -28,8 +28,8 @@ export default function Liver_Input() {
                     </div>
                     <div className="input-container">
                         <div className="label-input">
-                            <label htmlFor="cardiovascular-parameter3" className='input-label'>Parameter 3:</label>
-                            <input type="text" id="cardiovascular-parameter3" name="cardiovascular.parameter3" placeholder='Enter the parameter 3' className='input-field' value={formValues['cardiovascular.parameter3'] ?? ''} onChange={handleInputChange} />
+                            <label htmlFor="Liver-parameter3" className='input-label'>Parameter 3:</label>
+                            <input type="text" id="Liver-parameter3" name="Liver.parameter3" placeholder='Enter the parameter 3' className='input-field' value={formValues['Liver.parameter3'] ?? ''} onChange={handleInputChange} />
                         </div>
                         <p className="description">
                             Description for Parameter 3
@@ -37,8 +37,8 @@ export default function Liver_Input() {
                     </div>
                     <div className="input-container">
                         <div className="label-input">
-                            <label htmlFor="cardiovascular-parameter4" className='input-label'>Parameter 4:</label>
-                            <input type="text" id="cardiovascular-parameter4" name="cardiovascular.parameter4" placeholder='Enter the parameter 4' className='input-field' value={formValues['cardiovascular.parameter4'] ?? ''} onChange={handleInputChange} />
+                            <label htmlFor="Liver-parameter4" className='input-label'>Parameter 4:</label>
+                            <input type="text" id="Liver-parameter4" name="Liver.parameter4" placeholder='Enter the parameter 4' className='input-field' value={formValues['Liver.parameter4'] ?? ''} onChange={handleInputChange} />
                         </div>
                         <p className="description">
                             Description for Parameter 4
