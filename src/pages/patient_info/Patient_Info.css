@@ -118,6 +118,7 @@
     gap: 10px;
 }
 
+
 .description {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
@@ -125,6 +126,10 @@
     color: black;
     margin-top: 10px;
 }
+
+
+
+
 
 .save-title-container {
     display: flex;
