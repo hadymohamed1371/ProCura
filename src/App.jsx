@@ -50,7 +50,7 @@ function App() {
                     <Route path='/settings' element={<Settings />} />
                     
                     <Route path='/profile' element={<Profile />} />
-                    <Route path='/edit-profile' element={<Edit_Profile />} />
+                    <Route path='/profile/edit' element={<Edit_Profile />} />
                 </Route>
             </Routes>
         </div>

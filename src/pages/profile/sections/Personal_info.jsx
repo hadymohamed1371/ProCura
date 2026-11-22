@@ -1,34 +1,64 @@
 import React from 'react'
 import './Personal_info.css'
+import { useState, useEffect } from "react";
 import Section from '../../../components/section/Section'
-
+import Profile_Gender from "../../../assets/icons/Profile_Gender.svg"
+import Profile_Date from "../../../assets/icons/Profile_Date.svg"
+import Profile_Height from "../../../assets/icons/Profile_Height.svg"
+import Profile_Weight from "../../../assets/icons/Profile_Weight.svg"
 export default function Personal_info() {
+  const [profile, setProfile] = useState({
+  dateOfBirth: "12 March, 2002",
+  gender: "Female",
+  height: "165",
+  weight: "60",
+});
+
+useEffect(() => {
+  const savedProfile = localStorage.getItem("profileData");
+
+  if (savedProfile) {
+    setProfile(JSON.parse(savedProfile));
+  }
+}, []);
   return (
-   
+   <div className='personal-section'>
 <Section title="Personal Information">
  <div className='personal-info-container'>
     <div className="info-item">
           <span>Date of Birth</span>
-          <p>12 March, 2002</p>
+        <div className="info-value">
+    <img src={Profile_Date} alt="Date" />
+      <p>{profile.dateOfBirth}</p>
+  </div>
         </div>
 
         <div className="info-item">
           <span>Gender</span>
-          <p>Female</p>
+         <div className="info-value">
+    <img src={Profile_Gender} alt="Gender" />
+    <p>{profile.gender}</p>
+  </div>
         </div>
 
         <div className="info-item">
           <span>Height</span>
-          <p>165 cm</p>
+         <div className="info-value">
+    <img src={Profile_Height} alt="Height" />
+     <p>{profile.height} cm</p>
+  </div>
         </div>
 
         <div className="info-item">
           <span>Weight</span>
-          <p>60 kg</p>
+         <div className="info-value">
+    <img src={Profile_Weight} alt="Weight" />
+   <p>{profile.weight} kg</p>
+  </div>
         </div>
  </div>
 
 </Section>
-  
+  </div>
   )
 }

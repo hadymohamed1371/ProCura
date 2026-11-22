@@ -1,8 +1,26 @@
 @import '../../App.css';
 
-.profile-bottom-container {
-   display:flex;
-    width: 100%;
-    margin:20px;
-    gap:25px;
+
+
+ .profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "profile profile"
+    "personal health";
+  
+  /* align-items: stretch; */
 }
+
+.profile-container {
+  grid-area: profile;
+}
+
+.personal-info-container {
+  grid-area: personal;
+}
+
+.health-info-container {
+  grid-area: health;
+}
+ 
