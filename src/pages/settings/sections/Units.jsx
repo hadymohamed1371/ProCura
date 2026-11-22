@@ -9,7 +9,7 @@ function Units() {
   const [bloodGlucoseUnit, setBloodGlucoseUnit] = useState("mg/dL");
 
   const isMetric = unitSystem === "Metric";
-  const heightUnit = isMetric ? "cm" : "ft / in";
+  const heightUnit = isMetric ? "cm" : "ft/in";
   const weightUnit = isMetric ? "kg" : "lbs";
 
   return (
@@ -43,17 +43,17 @@ function Units() {
 
         {/* Current System Units Summary */}
         <div className="units-current-summary">
-          <span className="units-current-heading">Current system units:</span>
-          <div className="units-current-values">
-            <div className="units-current-item">
-              <span className="units-current-key">Height unit:</span>{" "}
-              <span className="units-current-val">{heightUnit}</span>
+            <span className="units-current-heading">Current system units:</span>
+            <div className="units-current-values">
+                <div className="units-current-item">
+                <span className="units-current-key">Height unit:</span>{" "}
+                <span className="units-current-val">{heightUnit}</span>
+                </div>
+                <div className="units-current-item">
+                <span className="units-current-key">Weight unit:</span>{" "}
+                <span className="units-current-val">{weightUnit}</span>
+                </div>
             </div>
-            <div className="units-current-item">
-              <span className="units-current-key">Weight unit:</span>{" "}
-              <span className="units-current-val">{weightUnit}</span>
-            </div>
-          </div>
         </div>
 
         {/* Vital Signs Units List */}
