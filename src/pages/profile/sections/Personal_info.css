@@ -1,0 +1,35 @@
+@import '../../../App.css';
+@import '../Profile.css';
+
+.personal-info-container{
+    display:grid;
+  gap: 40px;
+width: 485px;
+margin: 10px;
+}
+.personal-section{
+     height: 100%;
+  margin-left:20px;
+}
+.info-item {
+   display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.info-item span {
+  color:var(--color-blue);
+  font-size: 18px;
+  font-weight:bold;
+}
+
+.info-item p {
+    color:#A9BBD9;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+.info-value{
+  display: flex;
+  gap:40px;
+}
+

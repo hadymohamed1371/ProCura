@@ -3,7 +3,7 @@
 .settings-sections-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
   max-width: 760px;
   margin-top: 24px;
 }

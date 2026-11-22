@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Section from '../../../components/section/Section'
-import Vital from '../../../components/vital/Vital'
+import Button from '../../../components/button/Button'
 
 export default function Health_Trends() {
     return (
@@ -9,6 +9,13 @@ export default function Health_Trends() {
         <Section
         title="Health Trends"
         >
+            
+            <Button
+            buttonContent={"Normal Button"}
+            appearance=''
+            disabled={true}
+            action={() => console.log("Nigga")}
+            />
 
         </Section>
 
