@@ -1,55 +1,101 @@
-
 @import "../../App.css";
+
+
 .edit-profile-page {
-    margin-left: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+    --grid-gap: 12px;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--grid-gap);
+}
+
+.edit-profile-page .container {
+    margin-bottom: 0;
+}
+
+.edit-profile-page .section-body {
     width: 100%;
+    min-width: 0;
 }
 
 .edit-profile-form {
-    width: 100%;
-}
-.profile-section-wrapper {
-    width: 1080px;
-    max-width: 100%;
-}
-.profile-section-wrapper .section-body {
-    width: 100%;
-    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--grid-gap);
 }
 
-.profile-section-wrapper .section-content {
-    padding: 20px;
+.profile-info-section {
+    grid-column: 1 / -1;
+    min-width: 0;
 }
+
+
 
 .profile-info-layout {
     display: grid;
-    grid-template-columns: 180px minmax(0, 1fr) 150px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     align-items: center;
-    gap: 25px;
-    width: 100%;
+    gap: var(--grid-gap);
 }
-/* Profile Photo */
+
+/* Profile photo + upload */
 
 .profile-photo {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: var(--grid-gap);
 }
-.profile-photo img {
+
+.profile-photo-image {
     width: 100px;
     height: 100px;
     object-fit: contain;
 }
-/* Profile Fields */
+
+.edit-profile-page .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.upload-photo-label {
+    padding: 6px 18px;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-blue);
+
+    border: 1px solid var(--color-blue);
+    border-radius: 25px;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.upload-photo-label:hover {
+    background-color: var(--color-blue);
+    color: white;
+}
+
+.edit-profile-page .visually-hidden:focus-visible + .upload-photo-label {
+    outline: 2px solid var(--color-blue);
+    outline-offset: 2px;
+}
+
+/* Profile fields: name | email, city | country */
 
 .profile-fields {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 30px;
-    width: 100%;
+    gap: var(--grid-gap);
 }
 
 .form-group {
@@ -59,14 +105,14 @@
     min-width: 0;
 }
 
-.form-group label {
+.profile-fields .form-group label {
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 700;
     color: #131F60;
 }
 
-.form-group input {
+.profile-fields .form-group input {
     width: 100%;
     height: 50px;
     padding: 0 18px;
@@ -79,110 +125,65 @@
     outline: none;
 }
 
-.form-group input::placeholder {
+.profile-fields .form-group input::placeholder {
     color: #999;
 }
 
-.form-group input:focus {
+.profile-fields .form-group input:focus {
     border-color: var(--color-blue);
 }
 
+/* Save / Cancel */
 
-/* Save Button */
-
-.profile-save {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.profile-save .button {
-    min-width: 130px;
-    min-height: 65px;
-    padding: 8px 25px;
-    font-size: 25px;
-}
-
-.profile-details-layout {
+.profile-buttons {
     display: grid;
-    grid-template-columns: 485px 485px;
-    gap: 12px;
-    align-items: stretch;
+    gap: var(--grid-gap);
+}
+
+.profile-buttons .button {
+    width: 100%;
+    height: 45px;
+    box-sizing: border-box;
+    padding: 8px 15px;
 }
 
 
-/* Fields Layout */
+/* ===== Personal information & Health lifestyle ===== */
 
-.personal-information-fields,
-.health-lifestyle-fields {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-    width: 485px;
+.details-fields {
+    display: grid;
+    gap: var(--grid-gap);
 }
 
-
-/* Form Groups */
-
-.profile-details-layout .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 0;
-}
-
-.profile-details-layout .form-group label {
-    color: var(--color-blue);
+.details-fields .form-group label {
+    font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 600;
+    color: var(--color-blue);
 }
 
+/* Icon (30x30, no background) + input */
 
-
-
-.profile-details-layout .input-with-icon {
-    display: flex;
+.input-with-icon {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
-    gap: 25px;
-    width: 100%;
-    min-width: 0;
+    gap: var(--grid-gap);
 }
 
-
-/* Icon Container */
-
-.profile-details-layout .field-icon {
-    width: 65px;
-    min-width: 65px;
-    height: 52px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: #F0F8FF;
-    border-radius: 12px;
-}
-
-
-/* Icon Images */
-
-.profile-details-layout .field-icon img {
-    width: 38px;
-    height: 38px;
+.input-with-icon .field-icon {
+    width: 30px;
+    height: 30px;
     object-fit: contain;
 }
 
-
-
-.profile-details-layout .input-with-icon input,
-.profile-details-layout .input-with-icon select {
-    flex: 1;
+.input-with-icon input,
+.input-with-icon select {
+    width: 100%;
     min-width: 0;
-    width: 0;
     height: 52px;
-
     padding: 0 15px;
+    box-sizing: border-box;
 
     border: 1px solid #b5bfd8;
     border-radius: 12px;
@@ -193,35 +194,13 @@
     font-family: 'Inter', sans-serif;
     font-size: 14px;
 
-    box-sizing: border-box;
     outline: none;
     transition: border-color 0.2s ease;
 }
 
-
-/* Focus Effect */
-
-.profile-details-layout .input-with-icon input:focus,
-.profile-details-layout .input-with-icon select:focus {
+.input-with-icon input:focus,
+.input-with-icon select:focus {
     border-color: var(--color-blue);
 }
 
 
-
-.profile-details-layout > div:nth-child(2) {
-    margin-left: 60px;
-}
-.profile-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-.profile-buttons .button {
-    width: 150px;
-    height: 45px;
-    box-sizing: border-box;
-    padding: 8px 15px;
-}
