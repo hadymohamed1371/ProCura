@@ -1,5 +1,5 @@
-@import "../../App.css";
 
+@import "../../App.css";
 
 .edit-profile-page {
     --grid-gap: 12px;
@@ -29,7 +29,7 @@
     min-width: 0;
 }
 
-
+/* Profile Information Layout */
 
 .profile-info-layout {
     display: grid;
@@ -45,11 +45,12 @@
     flex-direction: column;
     align-items: center;
     gap: var(--grid-gap);
+    margin-left: 25px;
 }
 
 .profile-photo-image {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
 }
 
@@ -107,7 +108,7 @@
 
 .profile-fields .form-group label {
     font-family: 'Inter', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: #131F60;
 }
@@ -138,6 +139,7 @@
 .profile-buttons {
     display: grid;
     gap: var(--grid-gap);
+    margin-right: 25px;
 }
 
 .profile-buttons .button {
@@ -146,6 +148,8 @@
     box-sizing: border-box;
     padding: 8px 15px;
 }
+
+
 
 
 /* ===== Personal information & Health lifestyle ===== */
@@ -202,5 +206,3 @@
 .input-with-icon select:focus {
     border-color: var(--color-blue);
 }
-
-
