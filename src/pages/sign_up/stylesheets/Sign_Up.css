@@ -1,2 +1,477 @@
-@import '../../../App.css';
+ /* {
+    box-sizing: border-box;
+}
 
+.signup-page {
+    min-height: 100vh;
+    width: 100%;
+    background: #f0f4ff;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+Background Shapes 
+
+.signup-shape {
+    position: absolute;
+    pointer-events: none;
+    background: #dce8ff;
+}
+
+.signup-shape-top {
+    width: 65%;
+    height: 48%;
+    top: -10%;
+    right: -8%;
+    border-radius: 0 0 0 55%;
+    transform: rotate(8deg);
+    opacity: 0.85;
+}
+
+.signup-shape-bottom {
+    width: 48%;
+    height: 45%;
+    bottom: -20%;
+    left: -5%;
+    border-radius: 0 65% 0 0;
+}
+
+.signup-shape-right {
+    width: 30%;
+    height: 35%;
+    bottom: -12%;
+    right: -5%;
+    border-radius: 70% 0 0 0;
+}
+
+
+
+.signup-logo {
+    position: absolute;
+    top: 35px;
+    left: 40px;
+    z-index: 2;
+    font-size: 42px;
+    font-weight: 500;
+    letter-spacing: -3px;
+    background: linear-gradient(90deg, #448bd0, #8b8de0, #8ac9a9);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+
+
+.signup-card {
+    width: 500px;
+    min-height: 520px;
+    padding: 18px 55px 22px;
+    background: rgba(216, 230, 255, 0.85);
+    border-radius: 45px;
+    box-shadow: 3px 5px 5px rgba(0, 0, 0, 0.22);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.signup-tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #c1cce0;
+    margin-bottom: 18px;
+}
+
+.signup-tabs button {
+    width: 50%;
+    padding: 0 0 16px;
+    background: transparent;
+    border: none;
+    color: #aeb9d0;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+.signup-tabs button.active {
+    color: #344c9b;
+}
+
+.signup-tabs button.active::after {
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 2px;
+    background: #344c9b;
+    bottom: -1px;
+    left: 5%;
+}
+
+Heading
+
+.signup-heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.signup-heading h3 {
+    color: #344c9b;
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.signup-heading p {
+    color: #6985b0;
+    font-size: 15px;
+    line-height: 1.4;
+    max-width: 270px;
+    margin: auto;
+}
+
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.signup-form input {
+    width: 100%;
+    height: 37px;
+    border: 1px solid #a5b4d0;
+    border-radius: 10px;
+    background: rgba(245, 248, 255, 0.55);
+    outline: none;
+    padding: 0 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #344c9b;
+    transition: 0.3s;
+}
+
+.signup-form input::placeholder {
+    color: #b6c5dd;
+}
+
+.signup-form input:focus {
+    border-color: #4b83d5;
+    background: #f5f8ff;
+    box-shadow: 0 0 5px rgba(75, 131, 213, 0.2);
+}
+
+
+.signup-submit {
+    width: 100%;
+    height: 40px;
+    background: #4a82d5;
+    color: white;
+    border: 1px solid #386dc0;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.signup-submit:hover {
+    background: #356fc4;
+}
+
+
+.signup-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 9px;
+}
+
+.signup-divider span {
+    height: 1px;
+    flex: 1;
+    background: #899bb9;
+}
+
+.signup-divider p {
+    color: #657b9d;
+    font-size: 14px;
+    margin: 0;
+}
+
+
+.signup-footer {
+    text-align: center;
+    color: #526b91;
+    font-size: 11px;
+    margin-top: 15px;
+}
+
+.signup-footer button {
+    background: transparent;
+    border: none;
+    color: #4b83d5;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 11px;
+    padding-left: 3px;
+}
+
+
+.signup-branding {
+    position: absolute;
+    bottom: 35px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+}
+
+.branding-icon {
+    width: 65px;
+    height: 65px;
+    border: 5px solid #4b8bd5;
+    border-right-color: #8a91df;
+    border-bottom-color: #70bcae;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-35deg);
+}
+
+.branding-icon span {
+    color: #4b8bd5;
+    font-size: 21px;
+    font-weight: bold;
+    transform: rotate(35deg);
+}
+
+.branding-text h3 {
+    color: #477eb9;
+    font-size: 18px;
+    margin: 2px 0;
+    font-weight: 600;
+}
+
+
+@media (max-width: 600px) {
+
+    .signup-page {
+        padding: 100px 15px 130px;
+    }
+
+    .signup-logo {
+        top: 20px;
+        left: 20px;
+        font-size: 34px;
+    }
+
+    .signup-card {
+        width: 100%;
+        max-width: 450px;
+        min-height: auto;
+        padding: 22px 25px;
+        border-radius: 30px;
+    }
+
+    .signup-form {
+        gap: 18px;
+    }
+
+    .signup-heading p {
+        font-size: 14px;
+    }
+
+    .signup-branding {
+        bottom: 18px;
+        left: 15px;
+    }
+
+    .branding-icon {
+        width: 48px;
+        height: 48px;
+        border-width: 4px;
+    }
+
+    .branding-text h3 {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 350px) {
+
+    .signup-card {
+        padding: 18px 15px;
+    }
+
+    .signup-tabs button {
+        font-size: 17px;
+    }
+
+    .signup-branding {
+        gap: 7px;
+    }
+}   */
+
+.signup-page {
+    width: 100%;
+    min-height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+/* Sign Up Card */
+.signup-card {
+    width: 500px;
+    padding: 25px 55px;
+    background-color: #e0eaff;
+    border-radius: 35px;
+    box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Tabs */
+.signup-tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #bdc9df;
+    margin-bottom: 20px;
+}
+
+.signup-tabs button {
+    width: 50%;
+    padding: 10px;
+    background: none;
+    border: none;
+    color: #aab5cc;
+    font-size: 19px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.signup-tabs button.active {
+    color: #344c9b;
+    border-bottom: 2px solid #344c9b;
+}
+
+/* Heading */
+.signup-heading {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.signup-heading h2 {
+    color: #344c9b;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.signup-heading p {
+    color: #6985b0;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 280px;
+    margin: auto;
+}
+
+/* Form */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.signup-form input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #aab8d1;
+    border-radius: 10px;
+    background-color: #edf3ff;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    outline: none;
+    color: #344c9b;
+}
+
+.signup-form input::placeholder {
+    color: #aebdd5;
+}
+
+.signup-form input:focus {
+    border-color: #4a82d5;
+}
+
+/* Submit */
+.signup-submit {
+    height: 42px;
+    width: 100%;
+    background-color: #4a82d5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.signup-submit:hover {
+    background-color: #356fc4;
+}
+
+/* Divider */
+.signup-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.signup-divider span {
+    flex: 1;
+    height: 1px;
+    background-color: #aab8d1;
+}
+
+.signup-divider p {
+    color: #657b9d;
+    font-size: 14px;
+}
+
+/* Footer */
+.signup-footer {
+    text-align: center;
+    color: #526b91;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.signup-footer button {
+    background: none;
+    border: none;
+    color: #4a82d5;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 3px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .signup-page {
+        min-height: 70vh;
+        padding: 20px 15px;
+    }
+
+    .signup-card {
+        width: 100%;
+        max-width: 450px;
+        padding: 25px;
+    }
+}
