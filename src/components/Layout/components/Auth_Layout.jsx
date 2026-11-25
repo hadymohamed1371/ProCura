@@ -4,11 +4,14 @@ import '../stylesheets/Auth_Layout.css'
 
 import ProCura_banner from "../../../assets/logos/ProCura_banner.svg";
 import Button from '../../../components/button/Button'
-
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from "react-router-dom";
+// import { Outlet } from 'react-router-dom'
 
 export default function Auth_Layout() {
-    
+     const location = useLocation();
+
+    const showNavbar = location.pathname === "/get-started";
+
     const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({
         behavior: 'smooth',
@@ -22,6 +25,7 @@ export default function Auth_Layout() {
                 <div className="banner-container">
                     <img src={ProCura_banner} alt="ProCura" className="banner" />
                 </div>
+                 {showNavbar && (
                 <div className="buttons-container">
                     <div className="reference-buttons">
                         <Button 
@@ -34,6 +38,7 @@ export default function Auth_Layout() {
                         />
                     </div>
                 </div>
+                 )}
             </div>
 
             <main className='main-content'>
