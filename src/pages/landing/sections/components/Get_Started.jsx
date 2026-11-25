@@ -24,16 +24,30 @@ export default function Get_Started() {
                 </div>
 
                 <div className="buttons-container">
-    <Button 
+                   <button
+        className="get-started-btn"
+        onClick={() => navigate('/sign-up')}
+    >
+        <span>Get Started</span>
+        <img src={Arrow_Right} alt="arrow" />
+    </button>
+                
+    {/* <Button 
         buttonContent={'Get Started'}
         logoRight={Arrow_Right}
         actionOnClick={() => navigate('/sign-up')}
-    />
-
-    <Button 
+        
+    /> */}
+  <button
+        className="sign-in-btn"
+        onClick={() => navigate('/sign-in')}
+    >
+        Sign In
+    </button>
+    {/* <Button 
         buttonContent={'Sign In'}
         actionOnClick={() => navigate('/sign-in')}
-    />
+    /> */}
 </div>
                 
             </div>

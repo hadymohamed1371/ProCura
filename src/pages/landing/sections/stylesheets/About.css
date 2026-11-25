@@ -56,16 +56,16 @@
      transition: all 0.3s ease;
 }
 .feature-card:hover {
- border-color: var(--color-sky-blue);
- color:var(--color-sky-blue);
+ border-color: var(--color-blue);
+ color:var(--color-blue);
     background-color:#EcF2FE;
 }
 .about-label {
     width: fit-content;
     padding: 18px 30px;
-    border: 1px solid var(--color-sky-blue);
+    border: 1px solid var(--color-blue);
     border-radius: 15px;
-    color:var(--color-sky-blue);
+    color:var(--color-blue);
      background-color: #E0EAFE;
     font-size: 18px;
     font-weight: 700;
@@ -205,7 +205,7 @@
 
     .feature-card {
         padding: 12px 6px;
-        font-size: 13px;
+        font-size: 10px;
         border-radius: 12px;
     }
 }
