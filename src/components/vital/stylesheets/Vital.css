@@ -1,0 +1,39 @@
+@import '../../../App.css';
+
+.vital-content {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.vital-value {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+
+}
+
+.value {
+    font-family: "Inter", sans-serif;
+    font-size: 43px;
+    font-weight: bold;
+    color: var(--color-head-title);
+}
+
+.unit {
+    font-family: "Inter", sans-serif;
+    font-size: 28px;
+    font-weight: normal;
+    color: var(--color-head-subtitle);
+}
+
+.normal-range {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--color-head-subtitle);
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

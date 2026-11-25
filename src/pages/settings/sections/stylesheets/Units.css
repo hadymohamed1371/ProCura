@@ -1,0 +1,98 @@
+@import "../../../../App.css";
+@import '../../Settings.css';
+
+.units-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 380px;
+  font-family: "Inter", sans-serif;
+}
+
+.units-system-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.units-label {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #4180C7;
+}
+
+.units-description {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #4180C7;
+}
+
+.units-current-summary {
+  display: flex;
+  gap: 4px;
+}
+
+.units-current-heading {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-head-title);
+}
+
+.units-current-values {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 12px;
+}
+
+.units-current-item {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  color: var(--color-head-subtitle);
+}
+
+.units-current-key {
+  font-weight: 500;
+}
+
+.units-current-val {
+  font-weight: 500;
+  color: var(--color-head-title);
+}
+
+.units-vitals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.units-vital-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.units-select {
+  border-radius: 8px;
+  border: 1px solid var(--color-head-subtitle);
+  background-color: #ffffff;
+  color: var(--color-head-title);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.units-select-wide {
+  min-width: 140px;
+}
+
+.units-select-compact {
+  min-width: 110px;
+}

@@ -1,13 +1,16 @@
 import React from 'react'
 
-import './Button.css'
+import './stylesheets/Button.css'
 
-export default function Button({buttonContent, logo, appearance='default', disabled, type='button', actionOnClick}) {
+export default function Button({buttonContent, logoRight, logoLeft, appearance='default', disabled, type='button', actionOnClick}) {
   return (
     <div>
         <button type={type} className={`button ${appearance === 'default' ? appearance : 'cancel-back'} ${disabled && 'disabled'}`} disabled={disabled} onClick={actionOnClick}>
-            {logo && <img src={logo} className="button-logo" />}
+            {logoLeft && <img src={logoLeft} className="button-logo-left" />}
+            
             {buttonContent}
+            
+            {logoRight && <img src={logoRight} className="button-logo-right" />}
         </button>
     </div>
   )

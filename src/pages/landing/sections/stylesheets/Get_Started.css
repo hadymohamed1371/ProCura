@@ -1,0 +1,19 @@
+@import '../../../../App.css';
+@import '../../Landing_Page.css';
+
+.title {
+    font-size: 45px;
+    font-weight: 800;
+    color: var(--color-head-title);
+    
+}
+
+.priority {
+    color: var(--color-lavander);
+}
+
+.subtitle {
+    font-size: 21px;
+    width: 300px;
+}
+

@@ -1,0 +1,51 @@
+@import "../../../../App.css";
+@import '../../Settings.css';
+
+.preferences-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 360px;
+  font-family: "Inter", sans-serif;
+}
+
+.preferences-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.preferences-label-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.preferences-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+  
+}
+
+.preferences-label {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #4180C7;
+}
+
+
+.preferences-select {
+  min-width: 140px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-head-subtitle);
+  background-color: #ffffff;
+  color: var(--color-head-title);
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}

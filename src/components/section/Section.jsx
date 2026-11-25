@@ -1,9 +1,9 @@
 import React from 'react'
 
-import "./Section.css"
+import "./stylesheets/Section.css"
 
 import Head_Title from '../head_title/Head_Title'
-import Badge from '../badge/Badge'
+import Badge from '../badge/components/Badge'
 
 export default function Section({title, subtitle, logo, positiveBadgeContent, negativeBadgeContent, curve, children}) {
     return (

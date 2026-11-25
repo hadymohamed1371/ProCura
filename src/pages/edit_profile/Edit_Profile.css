@@ -49,8 +49,8 @@
 }
 
 .profile-photo-image {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     object-fit: contain;
 }
 
@@ -70,11 +70,11 @@
     padding: 6px 18px;
 
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     color: var(--color-blue);
 
-    border: 1px solid var(--color-blue);
+    border: 2px solid var(--color-blue);
     border-radius: 25px;
 
     cursor: pointer;
@@ -95,8 +95,10 @@
 
 .profile-fields {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--grid-gap);
+    grid-template-columns: repeat(2, minmax(0, max-content));
+    gap: var(--grid-gap) 24px;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-group {
@@ -114,7 +116,7 @@
 }
 
 .profile-fields .form-group input {
-    width: 100%;
+    width: 250px;
     height: 50px;
     padding: 0 18px;
     box-sizing: border-box;

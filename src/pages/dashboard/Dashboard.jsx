@@ -5,11 +5,7 @@ import './Dashboard.css'
 
 import Disease_Navbar from '../../components/disease_navbar/Disease_Navbar'
 
-import Blood_Pressure from './sections/Blood_Pressure'
-import Heart_Rate from './sections/Heart_Rate'
-import Blood_Glucose from './sections/Blood_Glucose'
-import Health_Trends from './sections/Health_Trends'
-import Overall_Health from './sections/Overall_Health'
+import General from './subpages/components/General'
 
 export default function Dashboard() {
     const { pathname } = useLocation()
@@ -23,13 +19,7 @@ export default function Dashboard() {
             />
 
             {isGeneralPage ? (
-                <div className="dashboard-grid">
-                    <Blood_Pressure />
-                    <Heart_Rate />
-                    <Blood_Glucose />
-                    <Health_Trends />
-                    <Overall_Health />
-                </div>
+                <General />
             ) : (
                 <Outlet />
             )}

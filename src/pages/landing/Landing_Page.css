@@ -1,0 +1,19 @@
+@import '../../App.css';
+
+.landing-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.buttons-container,
+.reference-buttons,
+.sign-in-up-buttons-container {
+    display: flex;
+    gap: 10px;
+}
+
+.banner {
+    width: 250px;
+}
+

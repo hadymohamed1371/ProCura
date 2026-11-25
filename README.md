@@ -1,6 +1,6 @@
 # ProCura
 
-ProCura is a React application built with Vite. It currently includes a dashboard and a shared page layout.
+ProCura is a React application built with Vite. It includes a landing page, dashboard, patient information, profile, settings, and a shared application layout.
 
 ## Requirements
 
@@ -45,19 +45,91 @@ ProCura/
     │   └── logos/
     ├── components/
     │   ├── Layout/
-    │   │   └── Layout.jsx
-    │   └── Navbar.jsx
+    │   │   ├── components/
+    │   │   │   ├── Auth_Layout.jsx
+    │   │   │   └── Layout.jsx
+    │   │   └── stylesheets/
+    │   │       ├── Auth_Layout.css
+    │   │       └── Layout.css
+    │   ├── badge/
+    │   │   ├── components/
+    │   │   │   └── Badge.jsx
+    │   │   ├── stylesheets/
+    │   │   │   └── Badge.css
+    │   │   └── README/
+    │   │       └── Badge_README.md
+    │   ├── button/
+    │   │   ├── Button.jsx
+    │   │   ├── stylesheets/
+    │   │   │   └── Button.css
+    │   │   └── README/
+    │   │       └── Button_README.md
+    │   ├── disease_navbar/
+    │   │   ├── Disease_Navbar.jsx
+    │   │   ├── Disease_Navbar.css
+    │   │   └── Disease_Navbar_README.md
+    │   ├── footer/
+    │   │   ├── components/
+    │   │   │   └── Footer.jsx
+    │   │   └── stylesheet/
+    │   │       └── Footer.css
+    │   ├── head_title/
+    │   │   ├── Head_Title.jsx
+    │   │   ├── stylesheets/
+    │   │   │   └── Head_Title.css
+    │   │   └── README/
+    │   │       └── Head_Title_README.md
+    │   ├── navbar/
+    │   │   ├── Navbar.jsx
+    │   │   ├── Navbar.css
+    │   │   └── Navbar_README.md
+    │   ├── section/
+    │   │   ├── Section.jsx
+    │   │   ├── stylesheets/
+    │   │   │   └── Section.css
+    │   │   └── README/
+    │   │       └── Section_README.md
+    │   └── vital/
+    │       ├── components/
+    │       │   └── Vital.jsx
+    │       ├── stylesheets/
+    │       │   └── Vital.css
+    │       └── README/
+    │           └── Vital_README.md
     └── pages/
+        ├── landing/
+        │   ├── Landing_Page.jsx
+        │   └── sections/
+        │       ├── components/
+        │       │   ├── About.jsx
+        │       │   ├── Features.jsx
+        │       │   └── Get_Started.jsx
+        │       └── stylesheets/
+        ├── sign_in/
+        │   ├── components/
+        │   │   └── Sign_In.jsx
+        │   └── stylesheets/
+        ├── sign_up/
+        │   ├── components/
+        │   │   └── Sign_Up.jsx
+        │   └── stylesheets/
         ├── dashboard/
         │   ├── Dashboard.jsx
-        │   └── Dashboard.css
-        └── profile_info/
-            └── Profile_Info.jsx
+        │   ├── sections/
+        │   │   ├── components/
+        │   │   └── stylesheets/
+        │   └── subpages/
+        │       ├── components/
+        │       └── stylesheets/
+        ├── patient_info/
+        ├── profile/
+        ├── edit_profile/
+        └── settings/
 ```
 
 - `src/main.jsx` starts the React application.
-- `src/App.jsx` defines the application routes.
-- `src/components/` contains reusable interface components and the shared layout.
+- `src/App.jsx` defines the application routes. `/get-started`, `/sign-in`, and `/sign-up` use `Auth_Layout`; `/` and the dashboard, patient information, settings, and profile routes use the shared `Layout`.
+- `src/components/` contains reusable interface components and the shared layout. Some component code and stylesheets are organized into `components/` and `stylesheets/` subfolders.
 - `src/pages/` contains page-level components.
 - `src/assets/` contains images, logos, and icons.
 

@@ -1,0 +1,34 @@
+@import '../../../App.css';
+
+.badge-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding: 0 10px;
+    height: auto;
+    border-radius: 30px;
+}
+
+.badge-content {
+    font-family: "Inter", sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    line-height: 25px;
+}
+
+.positive-badge {
+    background-color: var(--color-badge-positive-background);
+    color: var(--color-badge-positive-text);
+}
+
+.negative-badge {
+    background-color: var(--color-badge-negative-background);
+    color: var(--color-badge-negative-text);
+}
+
+.neutral-badge {
+    background-color: var(--color-badge-neutral-background);
+    color: var(--color-badge-neutral-text);
+}

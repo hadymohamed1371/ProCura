@@ -1,14 +1,19 @@
 import './App.css'
 
 import { Navigate, Route, Routes } from 'react-router-dom'
-import Layout from './components/Layout/Layout'
+import Layout from './components/Layout/components/Layout'
+import Sign_In from './pages/sign_in/components/Sign_In'
+import Sign_Up from './pages/sign_up/components/Sign_Up'
+
+import Landing_Page from './pages/landing/Landing_Page'
+import Auth_Layout from './components/Layout/components/Auth_Layout'
 
 import Dashboard from './pages/dashboard/Dashboard'
-import Cardiovascular from './pages/dashboard/subpages/Cardiovascular'
-import Chronic_Obstructive_Pulmonary from './pages/dashboard/subpages/Chronic_Obstructive_Pulmonary'
-import Diabetes from './pages/dashboard/subpages/Diabetes'
-import Heart from './pages/dashboard/subpages/Heart'
-import Liver from './pages/dashboard/subpages/Liver'
+import Cardiovascular from './pages/dashboard/subpages/components/Cardiovascular'
+import Chronic_Obstructive_Pulmonary from './pages/dashboard/subpages/components/Chronic_Obstructive_Pulmonary'
+import Diabetes from './pages/dashboard/subpages/components/Diabetes'
+import Heart from './pages/dashboard/subpages/components/Heart'
+import Liver from './pages/dashboard/subpages/components/Liver'
 
 import Patient_Info from './pages/patient_info/Patient_Info'
 import Cardiovascular_Input from './pages/patient_info/subpages/Cardiovascular_Input'
@@ -27,9 +32,14 @@ function App() {
     return (
         <div className="">
             <Routes>
+                <Route element={<Auth_Layout />}>
+                    <Route path="/get-started" element={<Landing_Page />} />
+                    <Route path="/sign-in" element={<Sign_In />} />
+                    <Route path="/sign-up" element={<Sign_Up />} />
+                </Route>
+
                 <Route element={<Layout />}>
-                    <Route path='/' element={<Dashboard />}>
-                    </Route>
+                    <Route path='/' element={<Dashboard />} />
                     <Route path='/dashboard' element={<Dashboard />}>
                         <Route path='cardiovascular' element={<Cardiovascular />} />
                         <Route path='chronic-obstructive-pulmonary' element={<Chronic_Obstructive_Pulmonary />} />

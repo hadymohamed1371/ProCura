@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './Head_Title.css'
+import './stylesheets/Head_Title.css'
 
 export default function Head_Title({title, pageTitle, subtitle, logo}) {
   return (
