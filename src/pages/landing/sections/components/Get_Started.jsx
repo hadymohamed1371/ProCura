@@ -7,14 +7,62 @@ import Button from '../../../../components/button/Button'
 
 import Arrow_Right from '../../../../assets/icons/Arrow_Right.svg'
 import Get_Started_photo from "../../../../assets/images/Get_Started_photo.png"
+
+
 // import Get_Started_Curve_right from "../../../../assets/images/Get_Started_Curve_right.svg"
 // import Get_Started_Curve_Left from "../../../../assets/images/Get_Started_Curve_Left.svg"
+
+
+
+import ProCura_banner from "../../../../assets/logos/ProCura_banner.svg"
+
+
+
 
 export default function Get_Started() {
 
     const navigate = useNavigate();
 
+
+const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+    })
+
+
+    }
+
+
     return (
+        <div className="landing-hero-wrapper">
+            {/* Navbar */}
+    <div className="landing-navbar">
+        <div className="banner-container">
+           <img
+    src={ProCura_banner}
+    alt="ProCura"
+    className="banner"
+    onClick={() => navigate('/get-started')}
+/>
+        </div>
+
+       
+            <div className="buttons-container">
+                <div className="reference-buttons">
+                    <Button
+                        buttonContent={'About'}
+                        actionOnClick={() => scrollToSection('about')}
+                    />
+
+                    <Button
+                        buttonContent={'Features'}
+                        actionOnClick={() => scrollToSection('features')}
+                    />
+                </div>
+            </div>
+        
+    </div>
         <div className='get-started-container'>
             <div className="title-subtitle-button-contianer">
                 <div className="title-subtitle-container">
@@ -55,6 +103,7 @@ export default function Get_Started() {
                     <img src={Get_Started_photo} alt="get-started-photo"/>
                 </div>
                 
+        </div>
         </div>
     )
 }

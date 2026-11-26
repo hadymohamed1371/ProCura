@@ -16,6 +16,22 @@
 }
 
 /* Background shapes */
+/* .signin-shapes {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    fill: #e0eafe;
+}
+.banner-container img {
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    display: inline-flex;
+    z-index: 1;
+} */
 .signin-shapes {
     position: absolute;
     inset: 0;
@@ -25,7 +41,23 @@
     pointer-events: none;
     fill: #e0eafe;
 }
+.signin-content{
+      position: relative;
+    min-height: 100vh;
+    isolation: isolate;
+}
+.banner-container {
+    position: relative;
+    z-index: 2;
+}
 
+.signin-content .banner-container img {
+    margin-top:20px;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
 /* Card */
 .signin-card {
     position: relative;

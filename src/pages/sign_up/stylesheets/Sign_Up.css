@@ -5,7 +5,7 @@
 }
 
 
-/* Main Page */
+
 .signup-page {
     position: relative;
     z-index: 1;
@@ -89,7 +89,14 @@
 }
 
 
-/* Heading */
+.signup-content .banner-container-signup img {
+    margin:20px;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
 .signup-heading {
     text-align: center;
 
