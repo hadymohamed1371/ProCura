@@ -10,12 +10,15 @@
 /* #E0EAFE */
     background-attachment: fixed;
 
-    padding: 24px;
+    /* padding: 24px;  */
 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     
+}
+.landing-navbar{
+   margin:20px 0;
 }
 .banner-container {
     display: flex;
