@@ -1,6 +1,6 @@
 @import '../../../App.css';
 @import '../Patient_Info.css';
-/* 
+
 .patient-info-general-cell {
     width: 100%;
     min-width: 0;
@@ -41,4 +41,4 @@
     .patient-info-general-cell .input-fields-container {
         grid-template-columns: 1fr;
     }
-} */
+}

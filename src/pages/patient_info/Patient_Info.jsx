@@ -38,10 +38,7 @@ export default function Patient_Info({ onSave }) {
                         <Outlet context={{formValues, handleInputChange}} />
                     </div>
 
-                    <General_Health_Input
-                    formValues={formValues}
-                    onInputChange={handleInputChange}
-                    />
+                   
                 </div>
 
                 <div className="patient-info-save-row">

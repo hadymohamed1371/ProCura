@@ -1,11 +1,11 @@
 import React from 'react'
 import Section from '../../../components/section/Section';
-// import './General_Health_Input.css';
+import './General_Health_Input.css';
 
-export default function General_Health_Input({formValues, onInputChange}) {
+export default function General_Health_Input({formValues, onInputChange, className=''}) {
     return (
-<div className='patient-info-general-cell'>      
-          <Section 
+<div className={`patient-info-general-cell ${className}`}>      
+        <Section 
             title="General Health Data"
             >
 

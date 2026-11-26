@@ -2,3 +2,87 @@
 @import '../Patient_Info.css';
 
 
+@import '../../../App.css';
+@import '../Patient_Info.css';
+
+.heart-input-page {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.heart-sections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+.heart-sections-grid > * {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.heart-sections-grid .input-fields-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.heart-sections-grid .input-container,
+.heart-sections-grid .label-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+    width: 100%;
+}
+
+.heart-sections-grid .input-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-blue);
+}
+
+.heart-sections-grid .input-field {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.heart-sections-grid .description {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.136);
+    margin-top: 5px;
+}
+
+.heart-general-health {
+    width: 100%;
+    min-width: 0;
+    margin-top: 25px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .heart-sections-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .heart-sections-grid .input-fields-container {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
