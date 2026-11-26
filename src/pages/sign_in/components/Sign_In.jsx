@@ -8,7 +8,7 @@ import ProCura_logo from '../../../assets/logos/Procura_Logo.svg'
 import About from '../../landing/sections/components/About'
 import Features from '../../landing/sections/components/Features'
 import Footer from '../../../components/footer/components/Footer'
-
+import ProCura_banner from "../../../assets/logos/ProCura_banner.svg"
 export default function Sign_In() {
 
     const navigate = useNavigate()
@@ -31,7 +31,17 @@ export default function Sign_In() {
 
     return (
         <div>
-
+<div className="landing-navbar">
+        <div className="banner-container">
+           <img
+    src={ProCura_banner}
+    alt="ProCura"
+    className="banner"
+    onClick={() => navigate('/get-started')}
+/>
+        </div>
+            </div>
+        
             {/* Sign In content */}
             <div className="signin-page">
     

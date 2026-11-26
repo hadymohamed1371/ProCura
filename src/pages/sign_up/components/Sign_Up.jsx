@@ -6,7 +6,7 @@ import { useState } from 'react'
 import About from '../../landing/sections/components/About'
 import Features from '../../landing/sections/components/Features'
 import Footer from '../../../components/footer/components/Footer'
-
+import ProCura_banner from "../../../assets/logos/ProCura_banner.svg"
 
 
 
@@ -36,6 +36,17 @@ export default function Sign_Up() {
     }
 
     return (
+        <div>
+            <div className="landing-navbar">
+        <div className="banner-container">
+           <img
+    src={ProCura_banner}
+    alt="ProCura"
+    className="banner"
+    onClick={() => navigate('/get-started')}
+/>
+        </div>
+            </div>
         <div className="signup-page">
 
             <div className="signup-card">
@@ -121,6 +132,7 @@ export default function Sign_Up() {
 
             </div>
 
+        </div>
         </div>
     )
 }
