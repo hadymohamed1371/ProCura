@@ -361,6 +361,14 @@ Heading
     border-bottom: 2px solid #344c9b;
 }
 
+
+.signup-content .banner-container-signup img {
+    margin:20px;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
 /* Heading */
 .signup-heading {
     text-align: center;

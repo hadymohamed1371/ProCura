@@ -37,16 +37,14 @@ export default function Sign_Up() {
 
     return (
         <div>
-            <div className="landing-navbar">
-        <div className="banner-container">
+         
            <img
     src={ProCura_banner}
     alt="ProCura"
     className="banner"
     onClick={() => navigate('/get-started')}
 />
-        </div>
-            </div>
+        
         <div className="signup-page">
 
             <div className="signup-card">

@@ -29,9 +29,9 @@ export default function Sign_In() {
         navigate('/dashboard')
     }
 
-    return (
-        <div>
-<div className="landing-navbar">
+    return (<div>
+        <div className='signin-content'>
+
         <div className="banner-container">
            <img
     src={ProCura_banner}
@@ -40,13 +40,8 @@ export default function Sign_In() {
     onClick={() => navigate('/get-started')}
 />
         </div>
-            </div>
-        
-            {/* Sign In content */}
-            <div className="signin-page">
-    
-                {/* Background shapes (decorative) */}
-                <svg
+           {/* Background shapes (decorative) */}
+            <svg
                     className="signin-shapes"
                     viewBox="0 0 1000 700"
                     preserveAspectRatio="none"
@@ -56,6 +51,12 @@ export default function Sign_In() {
                     <path d="M0 430 C90 540 190 585 260 568 C330 550 380 565 400 600 C412 625 414 670 416 700 L0 700 Z" />
                     <path d="M1000 507 C930 540 895 580 895 610 C895 650 840 685 790 700 L1000 700 Z" />
                 </svg>
+        
+            {/* Sign In content */}
+            <div className="signin-page">
+    
+             
+              
     
                 <div className="signin-card">
     
@@ -155,7 +156,7 @@ export default function Sign_In() {
     
     
             </div>
-
+</div>
             <About id={'about'} />
 
             <Features id={'features'} />
