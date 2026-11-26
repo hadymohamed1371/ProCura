@@ -59,7 +59,7 @@ The repository separates **offline ML experimentation/training** from **online s
 
 1. **Offline Research & Training Layer (`scripts/`, `notebooks/`, `src/liver_disease/data/`, `features/`, `models/benchmark.py`, `models/train.py`)**: Audits the immutable UCI ILPD CSV, removes exact duplicates prior to splitting, locks an 80/20 stratified holdout test set in `data/processed/`, benchmarks 11 classifiers with 5×3 Repeated Stratified CV, performs tuning, calibration, out-of-fold (OOF) threshold selection, single-pass holdout evaluation, and SHAP summary computation, and serializes a single self-contained inference bundle (`artifacts/models/liver_disease_pipeline.joblib`).
 2. **Online ML Microservice Layer (`src/liver_disease/api/` + `src/liver_disease/models/predict.py`)**: Loads `liver_disease_pipeline.joblib` once during FastAPI `lifespan` startup, never retrains at runtime, enforces `X-API-Key` authentication via constant-time comparison, validates inputs with Pydantic v2 (`extra="forbid"`), and exposes REST endpoints on port `8000`.
-3. **Decoupled Frontend Layer (`frontend/app.py`)**: A pure HTTP client built with Streamlit, Plotly, Pandas, and Requests. Its `frontend/Dockerfile` does not install `scikit-learn`, `shap`, `xgboost`, `lightgbm`, or `catboost`, enforcing zero ML logic duplication.
+3. **Decoupled Frontend Layer (`frontend/app.py`)**: A pure HTTP client built with Streamlit, Plotly, Pandas, and Requests. It does not use `scikit-learn`, `shap`, `xgboost`, `lightgbm`, or `catboost`, enforcing zero ML logic duplication.
 
 ### 1.2 End-to-End Component Connectivity Map
 
@@ -103,7 +103,7 @@ flowchart LR
 ### 1.3 Verified Module Dependency Graph
 Every component references `src/liver_disease/config.py` as its single source of truth for feature schemas, valid ranges, medical units, risk bands, target encoding, and artifact file paths:
 - `config.py` → imported by `loader.py`, `validation.py`, `preprocessing.py`, `engineering.py`, `benchmark.py`, `evaluate.py`, `explain.py`, `predict.py`, `train.py`, `schemas.py`, `routes.py`, `main.py`, and all CLI scripts.
-- `frontend/app.py` does **not** import `src/liver_disease` at all—it defines its own UI labels, validation ranges, `MEDICAL_DISCLAIMER`, and `SAMPLE_CSV_TEMPLATE` locally so the Streamlit container (`frontend/Dockerfile`) can run independently without copying `src/`.
+- `frontend/app.py` does **not** import `src/liver_disease` at all—it defines its own UI labels, validation ranges, `MEDICAL_DISCLAIMER`, and `SAMPLE_CSV_TEMPLATE` locally so it can run independently without copying `src/`.
 
 ---
 
@@ -228,7 +228,7 @@ All findings below were verified directly against source files and live artifact
 10. **Tuned Tree Estimators Wrapped with `RobustScaler` Inside Voting:** During GridSearchCV (`train.py:122,139`), `ExtraTrees_Tuned` and `RandomForest_Tuned` used `scaler="none"`, whereas `SoftVoting_ET_RF_LR` (`train.py:251`) passes all inputs through `scaler="robust"`. (Monotonic tree splits remain invariant under positive linear scaling, and the ensemble was directly evaluated via 5×3 CV with `scaler="robust"`.)
 11. **Unused Code Paths in Production Inference:** `ClinicalFeatureEngineer` keeps `add_clinical_ratios=False` and `SimpleImputer` never activates via the API (`allow_missing=False`).
 12. **Truncated Error Details on 100% Batch Failure (`routes.py:284`):** If every row in a CSV fails validation, `HTTP 422` caps `invalid_records` to the first `25` rows (`invalid_records[:25]`), whereas a batch with at least 1 valid row returns HTTP `200` with all invalid rows listed.
-13. **Duplicate Raw CSV & Uncreated `.env`:** `Indian Liver Patient Dataset (ILPD).csv` exists identically in both project root and `data/raw/`. No `.env` file exists yet locally (only `.env.example`), and `Dockerfile` hardcodes `--port 8000` (needs `$PORT` or platform port mapping if deployed on platforms expecting dynamic `$PORT`).
+13. **Duplicate Raw CSV & Uncreated `.env`:** `Indian Liver Patient Dataset (ILPD).csv` exists identically in both project root and `data/raw/`. No `.env` file exists yet locally (only `.env.example`).
 
 ---
 
@@ -610,7 +610,7 @@ $$f(\mathbf{x}) = \phi_0 + \sum_{j=1}^{M} \phi_j(\mathbf{x})$$
 
 | Method & Path | Auth Required | Purpose | Success Code | Error Codes |
 | :--- | :---: | :--- | :---: | :--- |
-| `GET /health` | **No** | Docker/load-balancer readiness probe & loaded model check | `200` | — *(returns `"degraded"` with `model_loaded: false` if artifact failed)* |
+| `GET /health` | **No** | Service readiness probe & loaded model check | `200` | — *(returns `"degraded"` with `model_loaded: false` if artifact failed)* |
 | `GET /docs`, `/redoc`, `/openapi.json` | **No** | Built-in Swagger UI, ReDoc, and OpenAPI 3.x specification | `200` | — |
 | `GET /model-info` | **Yes (`X-API-Key`)** | Full schema, units, bounds, threshold, metrics, global SHAP | `200` | `401`, `503` |
 | `POST /predict` | **Yes (`X-API-Key`)** | Single-patient classification, probability score, and risk band | `200` | `401`, `422`, `503` |
@@ -724,14 +724,10 @@ External web/mobile backends act as **trusted server-side proxies**:
 ### 10.1 Annotated Directory Tree
 ```text
 Antigravity/
-├── .dockerignore                         # Excludes .venv, .env, notebooks, tests, docs, Depi_Project from backend image
 ├── .env.example                          # Template env vars (LIVER_API_KEY, CORS, MAX_BATCH_ROWS)
 ├── .gitignore                            # Ignores .env, .venv, __pycache__, .pytest_cache, Depi_Project
 ├── README.md                             # Project overview, quick start & documentation index
-├── Dockerfile                            # FastAPI production container (python:3.12-slim, port 8000)
-├── docker-compose.yml                    # Orchestrates api (:8000) + frontend (:8501)
 ├── pyproject.toml                        # Packaging metadata + pytest config (testpaths=tests)
-├── render.yaml                           # Render Docker Blueprint for API + optional UI
 ├── requirements.txt                      # Pinned dependency constraints
 ├── artifacts/
 │   ├── models/
@@ -768,7 +764,6 @@ Antigravity/
 │   └── user_guides/Liver_Disease_User_Input_Guide.{md,pdf}
 ├── frontend/
 │   ├── app.py                            # 416-line Streamlit prototype (HTTP-only client)
-│   └── Dockerfile                        # Lightweight Streamlit container (zero ML deps)
 ├── notebooks/
 │   ├── 01_data_audit.ipynb               # Executed (3/3 code cells)
 │   ├── 02_eda.ipynb                      # Executed (3/3 code cells)
@@ -809,13 +804,13 @@ Antigravity/
 | Variable | Default / Example | Required | Component | Purpose |
 | :--- | :--- | :---: | :--- | :--- |
 | `LIVER_API_KEY` | *(generate 32+ char token via `secrets.token_urlsafe(32)`)* | **Yes** | FastAPI & Streamlit | Secret required in `X-API-Key` HTTP header |
-| `API_HOST` | `0.0.0.0` | No | FastAPI (`Dockerfile` / CLI) | Bind interface (`CMD` uses `0.0.0.0`) |
+| `API_HOST` | `127.0.0.1` | No | FastAPI (CLI) | Local bind interface |
 | `API_PORT` | `8000` | No | FastAPI | Listening port |
 | `LOG_LEVEL` | `INFO` | No | FastAPI | Python logging verbosity |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost:8501,http://127.0.0.1:8501` | No | FastAPI | Comma-separated allowed CORS origins |
 | `MODEL_ARTIFACT_PATH` | `artifacts/models/liver_disease_pipeline.joblib` | No | FastAPI | Override path to serialized `.joblib` bundle |
 | `MAX_BATCH_ROWS` | `5000` | No | FastAPI | Maximum CSV rows permitted in `/predict/batch` |
-| `API_BASE_URL` | `http://localhost:8000` (`http://api:8000` in Compose) | No | Streamlit | Target FastAPI service URL |
+| `API_BASE_URL` | `http://localhost:8000` | No | Streamlit | Target FastAPI service URL |
 
 ### 11.2 How to Run & Test Locally (PowerShell)
 1. **Configure `.env`** (note: `.env` does not currently exist in the workspace):
@@ -841,9 +836,10 @@ Antigravity/
    .venv\Scripts\pytest.exe tests -v
    .venv\Scripts\python.exe scripts\verify_live_api.py
    ```
-5. **Docker Compose**:
-   - `docker compose up --build -d` launches `liver-disease-api` (`:8000`, non-root `appuser`, `HEALTHCHECK` on `/health`) and `liver-disease-frontend` (`:8501`, waits for `api` `service_healthy`).
-   - Hosting requirements: `python:3.12-slim` + `libgomp1` + `curl` (handled in `Dockerfile`), ~500 MB–1 GB RAM recommended for `scikit-learn`/`shap`/FastAPI workers, TLS termination at reverse proxy/Render.
+5. **Local Host Execution**:
+   - Run FastAPI on `:8000`.
+   - Run Streamlit on `:8501`.
+   - The frontend reads `API_BASE_URL`, defaulting to `http://localhost:8000`.
 
 ### 11.3 Project Completion vs. Pending Handover Status
 
@@ -853,10 +849,10 @@ Antigravity/
 | **EDA & Statistical Tests** | **Completed** | `eda_summary.json`, Figures `01`–`04`, `02_eda.ipynb` | Executed & saved. |
 | **11-Model Benchmark & Ablations** | **Completed** | 4 benchmark CSVs, `benchmark_summary.json`, Figure `05` | Executed & saved. |
 | **Tuning, Soft Voting, Threshold, Eval & SHAP** | **Completed** | `liver_disease_pipeline.joblib`, `model_metadata.json`, `final_evaluation_report.json`, 5 evaluation/SHAP PNGs | Model `v1.0.0` trained `2026-11-23T00:00:55Z`. |
-| **FastAPI Service & Auth & Batch & SHAP API** | **Completed** | `src/liver_disease/api/*`, `verify_live_api.py` | Ready for local/container execution. |
-| **Streamlit Prototype UI** | **Completed** | `frontend/app.py`, `frontend/Dockerfile` | Optional UI enhancements (e.g. disabling default High-risk values, cross-field warnings `DB <= TB`) if desired. |
+| **FastAPI Service & Auth & Batch & SHAP API** | **Completed** | `src/liver_disease/api/*`, `verify_live_api.py` | Ready for local execution. |
+| **Streamlit Prototype UI** | **Completed** | `frontend/app.py` | Optional UI enhancements (e.g. disabling default High-risk values, cross-field warnings `DB <= TB`) if desired. |
 | **Automated QA Test Suite & Notebooks** | **Completed** | 29 tests in `tests/*.py`, 5 executed `.ipynb` files | Re-run full `pytest` after final handover check. |
-| **Docker & Cloud Configs Written** | **Completed** | `Dockerfile`, `frontend/Dockerfile`, `docker-compose.yml`, `render.yaml` | Files authored, not yet built/deployed to cloud. |
+| **Local Deployment Guide** | **Completed** | `docs/deployment/DEPLOYMENT_GUIDE.md` | Host startup instructions documented. |
 | **Local `.env` & Secret Provisioning** | **Pending** | `.env` does not exist yet (only `.env.example`) | Copy `.env.example` to `.env` and set `LIVER_API_KEY`. |
 | **Cloud Hosting Deployment (Render / Cloud)** | **Pending** | `render.yaml` present; no live cloud URL configured | Push repo to Git, connect Render Blueprint, set `LIVER_API_KEY` & restrict `CORS_ALLOWED_ORIGINS` (replace `"*"`), verify `$PORT` if PaaS overrides `8000`. |
 | **External Backend Integration** | **Pending** | `BACKEND_INTEGRATION_GUIDE.md` delivered | External backend team must store `LIVER_API_KEY`, integrate REST calls, persist `prediction_id`, and render medical disclaimer. |
@@ -967,7 +963,7 @@ Neither—test overlap was proven `0` via row hashing, and `test.csv` was evalua
 Saving only the classifier creates **training-serving skew** if the API re-implements `log1p`, median values, `RobustScaler` centers/IQRs, or `OneHotEncoder` column ordering differently. Bundling `ClinicalFeatureEngineer + ColumnTransformer + VotingClassifier` inside one `Pipeline` ensures the exact training transformations run atomically on raw inputs during inference.
 
 **Q31. Why does the FastAPI service refuse to retrain automatically at startup?**
-Training at startup wastes CPU/RAM, delays container readiness checks, risks non-deterministic artifact drift if environment libraries change, and breaks horizontal auto-scaling consistency. Decoupling training (`scripts/run_training.py`) from serving (`api/main.py`) lets multiple API replicas boot in <2 seconds and return deterministic predictions tagged with `model_version="1.0.0"`.
+Training at startup wastes CPU/RAM, delays service readiness, risks non-deterministic artifact drift if environment libraries change, and complicates repeated startup. Decoupling training (`scripts/run_training.py`) from serving (`api/main.py`) lets the API boot quickly and return deterministic predictions tagged with `model_version="1.0.0"`.
 
 **Q32. How does API authentication work and why use `hmac.compare_digest` and fail-closed HTTP `503`?**
 Clients pass `X-API-Key` in HTTP headers. Standard `==` string comparison leaks key length/prefix bytes via timing side channels, so `security.py` uses constant-time `hmac.compare_digest`. Moreover, if the server boots without `LIVER_API_KEY` set, it **fails closed** with HTTP `503` rather than letting unauthenticated traffic slip through.
@@ -975,7 +971,7 @@ Clients pass `X-API-Key` in HTTP headers. Standard `==` string comparison leaks 
 **Q33. Why use Pydantic v2 with `extra="forbid"` and custom validators on `/predict` and `/predict/batch`?**
 Medical APIs must fail loudly on malformed payloads rather than silently coercing invalid inputs. `extra="forbid"` prevents typos (like `alkaline_phosphatase`) from being ignored; custom validators reject booleans (`True` == `1` in Python!), `NaN`/`Inf`, fractional ages, and out-of-range measurements (`TB = -1`), returning clear HTTP `422` field errors.
 
-**Q34. Why is the Streamlit frontend isolated into its own container without `scikit-learn` or `.joblib` access?**
+**Q34. Why is the Streamlit frontend isolated from `scikit-learn` and `.joblib` access?**
 Decoupling UI from inference via REST (`frontend/app.py` → FastAPI) demonstrates real microservice architecture: the graduation project's backend team (Node.js/Django/Spring/Mobile) can consume the exact same ML REST service, scale API workers independently of UI sessions, and swap model versions without touching frontend code.
 
 **Q35. If you had to evolve this prototype toward real clinical deployment, what would be required?**

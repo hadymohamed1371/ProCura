@@ -3,9 +3,9 @@ import pytest
 from fastapi.testclient import TestClient
 from PIL import Image
 
-from MLAIM.production.lab_ocr.api import create_app
-from MLAIM.production.lab_ocr.config import OCRConfig
-from MLAIM.production.lab_ocr.service import LabOCRService
+from lab_ocr.api import create_app
+from lab_ocr.config import OCRConfig
+from lab_ocr.service import LabOCRService
 
 
 class FakeEngine:
@@ -33,7 +33,7 @@ def test_index_and_security_headers(client):
 
 def test_no_streamlit_dependency():
     import sys
-    import MLAIM.production.lab_ocr.api  # noqa: F401
+    import lab_ocr.api  # noqa: F401
     assert "streamlit" not in sys.modules
 
 

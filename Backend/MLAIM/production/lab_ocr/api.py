@@ -113,7 +113,7 @@ def create_app(service: LabOCRService | None = None, predictor=None, model_spec_
     def advice(body: AdviceRequest):
         """Optional AI advice for an existing prediction (works offline via rule-based fallback)."""
         try:
-            from MLAIM.production.advisor import generate_advice
+            from production.advisor import generate_advice
         except ImportError:
             raise HTTPException(503, "The advice module is not installed on this server.")
         try:

@@ -17,7 +17,7 @@ import numpy as np
 import pandas as pd
 import sklearn
 
-from MLAIM.production.common import (
+from production.common import (
     ARTIFACT_DIR,
     HIGH_RISK_CUTOFF,
     LAB_MAPPABLE,

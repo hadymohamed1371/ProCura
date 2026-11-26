@@ -1,0 +1,18 @@
+{
+  "features": ["_AGE80", "SEXVAR", "BMI", "SMOKDAY2", "EXERANY2", "GENHLTH"],
+  "dropped_columns": ["SMOKE100"],
+  "target": "COPD",
+  "bmi_clip": [14.0, 60.0],
+  "fill_values": {
+    "_AGE80": 58.0,
+    "SEXVAR": 2.0,
+    "BMI": 27.44,
+    "SMOKDAY2": 0.0,
+    "EXERANY2": 1.0,
+    "GENHLTH": 3.0
+  },
+  "numeric": ["_AGE80", "BMI"],
+  "random_state": 42,
+  "test_size": 0.2,
+  "balancing": "RandomUnderSampler on the training split only"
+}

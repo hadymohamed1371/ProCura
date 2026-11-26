@@ -88,7 +88,7 @@ def run_bundle(bundle: dict, frame: pd.DataFrame, feature_order: list[str],
 
     Returns a plain dict; the caller wraps it in a PredictionResult.
     """
-    from MLAIM.production.lab_adapter import labs_to_cdc
+    from production.lab_adapter import labs_to_cdc
 
     lab_json = _frame_to_lab_json(frame, feature_order)
     if not lab_json:
@@ -135,7 +135,7 @@ def run_bundle(bundle: dict, frame: pd.DataFrame, feature_order: list[str],
             "allow_unreviewed": allow_unreviewed,
         }
 
-    from MLAIM.production.predict import predict_risk
+    from production.predict import predict_risk
 
     survey_result = predict_risk(partial)
     survey_risk = {

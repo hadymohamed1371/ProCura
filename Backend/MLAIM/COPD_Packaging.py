@@ -254,7 +254,9 @@ def _prepare(patient_data):
 def predict_risk(patient_data, model_path=MODEL_PATH):
     """Takes patient data (dict, list of dicts or DataFrame); returns risk score and category."""
     if not Path(model_path).exists():
-        train_and_save()
+        raise FileNotFoundError(
+            f"Model artifact not found at {model_path}. Run COPD_Packaging.py to train and save it."
+        )
     bundle = load_model(model_path)
     X, missing = _prepare(patient_data)
     X = X[bundle["features"]]

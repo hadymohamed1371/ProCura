@@ -1,6 +1,6 @@
 import csv, io
-from MLAIM.production.lab_ocr.schemas import LabReportResult, LabResult
-from MLAIM.production.lab_ocr.exporters import report_to_csv, report_to_json
+from lab_ocr.schemas import LabReportResult, LabResult
+from lab_ocr.exporters import report_to_csv, report_to_json
 
 def test_json_csv_exports():
     report = LabReportResult(source_filename="sample.pdf", results=[

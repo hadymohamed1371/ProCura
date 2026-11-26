@@ -1,4 +1,4 @@
-from MLAIM.production.lab_ocr.medical_extractor import extract_results
+from lab_ocr.medical_extractor import extract_results
 
 def test_extract_common_result():
     results = extract_results("Hemoglobin: 12.5 g/dL (Reference Range: 12.0-16.0)", 1, 92)

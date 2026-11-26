@@ -1,5 +1,5 @@
-from MLAIM.production.lab_ocr.schemas import LabReportResult, LabResult
-from MLAIM.production.lab_ocr.integrations.lab_results_adapter import prepare_prediction_features
+from lab_ocr.schemas import LabReportResult, LabResult
+from lab_ocr.integrations.lab_results_adapter import prepare_prediction_features
 
 def test_adapter_excludes_unreviewed_by_default():
     report = LabReportResult(source_filename="x.pdf", results=[

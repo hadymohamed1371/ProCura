@@ -21,7 +21,7 @@
 ## 2. Intended Use & Out-of-Scope Warning
 
 ### Intended Use
-- Academic graduation project demonstrating production-grade Machine Learning Engineering, leakage-free validation, SHAP explainability, secure FastAPI microservice design, automated QA testing, and Dockerized deployment.
+- Academic graduation project demonstrating production-grade Machine Learning Engineering, leakage-free validation, SHAP explainability, secure FastAPI microservice design, and automated QA testing.
 - Research prototyping and backend integration demonstration using liver function test (LFT) tabular attributes.
 
 ### Explicitly Out of Scope (CRITICAL)

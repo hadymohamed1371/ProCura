@@ -3,7 +3,7 @@ import { app } from "./app.js";
 import { env } from "./config/env.js";
 
 async function start() {
-  await mongoose.connect(env.MONGO_URI);
+  await mongoose.connect(env.MONGO_URI, { dbName: env.MONGO_DB });
   const server = app.listen(env.PORT, () => {
     console.log(`ProCura API listening on http://localhost:${env.PORT}`);
   });

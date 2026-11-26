@@ -1,6 +1,6 @@
 import fitz
-from MLAIM.production.lab_ocr.service import LabOCRService
-from MLAIM.production.lab_ocr.config import OCRConfig
+from lab_ocr.service import LabOCRService
+from lab_ocr.config import OCRConfig
 
 class FakeEngine:
     def recognize(self, image):

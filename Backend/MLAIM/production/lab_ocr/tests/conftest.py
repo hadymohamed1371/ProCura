@@ -5,8 +5,8 @@ import pandas as pd
 import pytest
 from sklearn.linear_model import LogisticRegression
 
-from MLAIM.production.lab_ocr.prediction import RiskPredictor, ModelSpec
-from MLAIM.production.lab_ocr.schemas import LabReportResult, LabResult
+from lab_ocr.prediction import RiskPredictor, ModelSpec
+from lab_ocr.schemas import LabReportResult, LabResult
 
 
 @pytest.fixture

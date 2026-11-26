@@ -13,8 +13,8 @@ MODEL = REPO_ROOT / "artifacts" / "diabetes_risk_model.joblib"
 
 pytestmark = pytest.mark.skipif(not MODEL.exists(), reason="production model not trained")
 
-from MLAIM.production.lab_ocr.prediction import RiskPredictor  # noqa: E402
-from MLAIM.production.lab_ocr.schemas import LabReportResult, LabResult  # noqa: E402
+from production.lab_ocr.prediction import RiskPredictor  # noqa: E402
+from production.lab_ocr.schemas import LabReportResult, LabResult  # noqa: E402
 
 
 def _result(name, value, unit, reviewed=True):
@@ -33,7 +33,7 @@ def predictor():
 
 
 def test_bundle_is_wrapped_and_predicts(predictor):
-    from MLAIM.production.integrations.production_bundle import ProductionRiskModel
+    from production.integrations.production_bundle import ProductionRiskModel
 
     assert isinstance(predictor._model, ProductionRiskModel)
     out = predictor.predict_report(_report(_result("Total Cholesterol", 240, "mg/dL"),
@@ -70,7 +70,7 @@ def test_unit_mismatch_is_excluded(predictor):
 
 
 def test_pipeline_json_entrypoint_adds_provenance_and_advice_fallback():
-    from MLAIM.production.pipeline import predict_from_lab_json
+    from production.pipeline import predict_from_lab_json
 
     lab = json.loads((REPO_ROOT / "lab_ocr_sample.json").read_text())
     out = predict_from_lab_json(lab, advice=True)
@@ -83,7 +83,7 @@ def test_pipeline_json_entrypoint_adds_provenance_and_advice_fallback():
 
 
 def test_glycemic_alert_elevated_override_in_pipeline():
-    from MLAIM.production.pipeline import predict_from_lab_json
+    from production.pipeline import predict_from_lab_json
 
     # Report with normal blood pressure (115/75) and normal cholesterol (160)
     # but elevated HbA1c (8.5%)
@@ -108,7 +108,7 @@ def test_glycemic_alert_elevated_override_in_pipeline():
 
 
 def test_random_glucose_is_not_treated_as_fasting():
-    from MLAIM.production.pipeline import predict_from_lab_json
+    from production.pipeline import predict_from_lab_json
 
     # Random glucose 130 mg/dL is normal casual/postprandial (cutoff is >= 200 for elevated)
     lab_random = [
@@ -121,7 +121,7 @@ def test_random_glucose_is_not_treated_as_fasting():
 
 
 def test_hba1c_ifcc_mmol_mol_is_converted():
-    from MLAIM.production.pipeline import predict_from_lab_json
+    from production.pipeline import predict_from_lab_json
 
     # HbA1c 30 mmol/mol (= 4.9% NGSP, completely normal)
     lab_ifcc = [
@@ -136,7 +136,7 @@ def test_hba1c_ifcc_mmol_mol_is_converted():
 
 
 def test_implausible_ocr_reads_routed_to_needs_recheck():
-    from MLAIM.production.pipeline import predict_from_lab_json
+    from production.pipeline import predict_from_lab_json
 
     # HbA1c 74% is physically impossible (likely 7.4% OCR misread)
     lab_implausible = [
@@ -149,7 +149,7 @@ def test_implausible_ocr_reads_routed_to_needs_recheck():
 
 
 def test_lab_only_ocr_report_with_advice_does_not_crash(predictor):
-    from MLAIM.production.pipeline import predict_from_report
+    from production.pipeline import predict_from_report
 
     # Report with only reviewed Glucose
     rep = _report(_result("Glucose", 140, "mg/dL"))

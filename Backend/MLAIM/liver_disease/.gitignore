@@ -46,5 +46,5 @@ Thumbs.db
 # Note on tracked datasets & production artifact:
 # data/raw/Indian Liver Patient Dataset (ILPD).csv (~24 KB), data/processed/ (~30 KB),
 # and artifacts/models/liver_disease_pipeline.joblib (~5.75 MB) are intentionally
-# kept versioned for reproducible tests, Docker builds, and Render deployment.
+# kept versioned for reproducible tests and local model execution.
 # Migrate to Git LFS or DVC if future datasets/artifacts exceed ~25 MB.

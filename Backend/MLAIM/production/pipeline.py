@@ -20,14 +20,14 @@ import json
 from pathlib import Path
 from typing import Any
 
-from MLAIM.production.predict import load_model, predict_risk
+from production.predict import load_model, predict_risk
 
 __all__ = ["predict_from_lab_json", "predict_from_report", "predict_from_file", "advise"]
 
 
 def advise(prediction: dict, patient: dict | None = None, language: str = "en") -> dict:
     """AI advice with a rule-based fallback. Imported lazily (needs the anthropic extra)."""
-    from MLAIM.production.advisor import generate_advice
+    from production.advisor import generate_advice
 
     return generate_advice(prediction, patient, language)
 
@@ -41,8 +41,8 @@ def _with_advice(result: dict, language: str, want_advice: bool) -> dict:
 
 def predict_from_lab_json(lab_json: Any, *, language: str = "en", advice: bool = False) -> dict:
     """OCR JSON (any lab naming/shape) -> prediction (+ optional advice)."""
-    from MLAIM.production.lab_adapter import labs_to_cdc
-    from MLAIM.production.clinical_rules import evaluate_glycemic_signals
+    from production.lab_adapter import labs_to_cdc
+    from production.clinical_rules import evaluate_glycemic_signals
 
     adapted = labs_to_cdc(lab_json)
     signals = adapted["lab_signals"]
@@ -133,8 +133,8 @@ def predict_from_lab_json(lab_json: Any, *, language: str = "en", advice: bool =
 def predict_from_report(report, *, language: str = "en", advice: bool = False,
                         allow_unreviewed: bool = False) -> dict:
     """An extracted LabReportResult (from lab_ocr) -> prediction (+ optional advice)."""
-    from MLAIM.production.lab_ocr.prediction.spec import ModelSpec
-    from MLAIM.production.lab_ocr.prediction.predictor import RiskPredictor
+    from production.lab_ocr.prediction.spec import ModelSpec
+    from production.lab_ocr.prediction.predictor import RiskPredictor
 
     spec_path = Path(__file__).resolve().parent / "lab_ocr" / "models" / "diabetes_spec.json"
     predictor = RiskPredictor(ModelSpec.load(spec_path), model=load_model())
@@ -145,7 +145,7 @@ def predict_from_report(report, *, language: str = "en", advice: bool = False,
 
 def predict_from_file(path: str | Path, *, language: str = "en", advice: bool = False) -> dict:
     """A PDF/image lab report -> OCR -> prediction (+ optional advice)."""
-    from MLAIM.production.lab_ocr import LabOCRService
+    from production.lab_ocr import LabOCRService
 
     report = LabOCRService().process_file(path)
     return predict_from_report(report, language=language, advice=advice)

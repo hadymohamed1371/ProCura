@@ -23,7 +23,7 @@ import math
 import re
 from typing import Any
 
-from MLAIM.production.clinical_rules import (
+from production.clinical_rules import (
     evaluate_glycemic_signals,
     ifcc_to_ngsp,
     is_plausible,

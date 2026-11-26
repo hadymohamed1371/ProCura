@@ -9,7 +9,7 @@ from types import SimpleNamespace
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))  # repo root, for `production`
-import MLAIM.production.advisor as advisor  # noqa: E402
+import production.advisor as advisor  # noqa: E402
 
 PATIENT = dict(HighBP=1, HighChol=1, CholCheck=1, BMI=38, Smoker=1, Stroke=0, HeartDiseaseorAttack=1,
                PhysActivity=0, Fruits=0, Veggies=0, HvyAlcoholConsump=0, AnyHealthcare=1, NoDocbcCost=1,

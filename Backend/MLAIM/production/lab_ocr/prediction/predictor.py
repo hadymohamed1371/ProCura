@@ -18,7 +18,7 @@ DISCLAIMER = (
 def _bundle_helpers():
     """Lazy access to the production bridge (kept optional: lab_ocr can run standalone)."""
     try:
-        from MLAIM.production.integrations.production_bundle import is_production_bundle, run_bundle
+        from production.integrations.production_bundle import is_production_bundle, run_bundle
         return is_production_bundle, run_bundle
     except ImportError:
         return None, None
@@ -67,7 +67,7 @@ class RiskPredictor:
         if model is not None:
             if isinstance(model, dict) and "model" in model:
                 try:
-                    from MLAIM.production.integrations.production_bundle import ProductionRiskModel
+                    from production.integrations.production_bundle import ProductionRiskModel
                     model = ProductionRiskModel(model)
                 except ImportError:
                     pass
@@ -94,7 +94,7 @@ class RiskPredictor:
         # the NaN-tolerant, calibrated path in the bridge is used.
         if isinstance(model, dict) and "model" in model:
             try:
-                from MLAIM.production.integrations.production_bundle import ProductionRiskModel
+                from production.integrations.production_bundle import ProductionRiskModel
                 return ProductionRiskModel(model)
             except ImportError:
                 raise PredictionError(

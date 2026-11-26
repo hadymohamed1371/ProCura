@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import Patient from "../models/Patient.js";
 import { requireAuth } from "../middleware/auth.js";
@@ -7,16 +8,17 @@ const router = Router();
 router.use(requireAuth);
 
 const patientSchema = z.object({
-  patientId: z.string().trim().min(1).max(100),
+  patientId: z.string().trim().min(1).max(100).default(() => randomUUID()),
   demographics: z.object({
-    name: z.string().trim().min(1).max(100),
-    dateOfBirth: z.coerce.date(),
-    sex: z.enum(["female", "male", "intersex", "unknown"]),
-  }),
+    name: z.string().trim().min(1).max(100).optional(),
+    dateOfBirth: z.coerce.date().optional(),
+    sex: z.enum(["female", "male", "intersex", "unknown"]).optional(),
+  }).optional(),
   vitals: z.object({
     systolicBp: z.number().min(40).max(300).optional(),
     diastolicBp: z.number().min(20).max(200).optional(),
     heartRate: z.number().min(20).max(250).optional(),
+    bloodGlucose: z.number().min(20).max(2000).optional(),
     temperatureC: z.number().min(25).max(45).optional(),
     bmi: z.number().min(10).max(100).optional(),
   }).default({}),
@@ -24,8 +26,9 @@ const patientSchema = z.object({
     diabetes: z.boolean().default(false),
     hypertension: z.boolean().default(false),
     smokingStatus: z.enum(["never", "former", "current", "unknown"]).default("unknown"),
-    labValues: z.record(z.string(), z.number()).default({}),
+    labValues: z.record(z.string(), z.union([z.number(), z.string()])).default({}),
   }).default({}),
+  recordedAt: z.coerce.date().optional(),
 });
 
 router.post("/", async (req, res, next) => {

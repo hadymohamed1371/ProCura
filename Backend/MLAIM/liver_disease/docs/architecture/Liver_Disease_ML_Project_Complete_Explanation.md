@@ -70,7 +70,7 @@ A defining architectural principle of this project is **strict separation of con
 
 - **Offline Experimentation & Training Layer** (`scripts/`, `notebooks/`, `src/liver_disease/models/benchmark.py`, `train.py`): Runs data auditing, EDA, 11-model CV benchmarking, hyperparameter tuning, holdout evaluation, and exports the frozen `liver_disease_pipeline.joblib` bundle.
 - **Online Inference Microservice** (`src/liver_disease/api/`, port `8000`): Loads `liver_disease_pipeline.joblib` **once** during FastAPI's `lifespan` startup event (`main.py`), initializes the SHAP `KernelExplainer` once in memory (`LiverDiseasePredictor`), and serves stateless HTTP requests. If the artifact is missing, it fails explicitly with `FileNotFoundError` / HTTP 503 rather than silently retraining.
-- **Presentation / Client Layer** (`frontend/app.py`, port `8501`, or any external Backend server): Communicates exclusively with FastAPI via JSON/multipart HTTP requests carrying the `X-API-Key` header. `frontend/Dockerfile` installs only `streamlit`, `requests`, `pandas`, and `plotly`—zero scikit-learn, XGBoost, or SHAP packages.
+- **Presentation / Client Layer** (`frontend/app.py`, port `8501`, or any external Backend server): Communicates exclusively with FastAPI via JSON/multipart HTTP requests carrying the `X-API-Key` header. The frontend uses only `streamlit`, `requests`, `pandas`, and `plotly`—zero scikit-learn, XGBoost, or SHAP packages.
 
 #### Actual End-to-End Architecture Diagram
 
@@ -109,7 +109,7 @@ All runtime versions below were verified directly from `artifacts/models/model_m
 | **REST API & Validation** | `fastapi`, `uvicorn`, `pydantic`, `python-dotenv`, `python-multipart` | `0.165.0`, `>=0.32`, `2.14.4` | Async REST microservice, automatic OpenAPI/Swagger UI (`/docs`), strict Pydantic v2 validation, `.env` loading, CSV file uploads. |
 | **Prototype Frontend** | `streamlit`, `plotly`, `requests` | `>=1.39`, `>=5.24`, `>=2.32` | Rapid interactive UI with probability gauges, horizontal SHAP charts, batch CSV upload/export over HTTP. |
 | **Visualization** | `matplotlib`, `seaborn` | `>=3.9`, `>=0.13.2` | Publication-quality EDA, benchmark, ROC/PR, confusion matrix, calibration, and SHAP plots (`180 DPI`). |
-| **Testing & Packaging** | `pytest`, `httpx`, `Docker`, `Docker Compose`, `Render` | `>=8.3`, `>=0.27` | Automated unit/integration/security tests (`tests/`), reproducible containers (`Dockerfile`, `frontend/Dockerfile`), cloud blueprint (`render.yaml`). |
+| **Testing & Packaging** | `pytest`, `httpx` | `>=8.3`, `>=0.27` | Automated unit/integration/security tests (`tests/`) and local service startup instructions. |
 
 ### 1.6 Complete End-to-End Workflow (User Input to Prediction Output)
 
@@ -698,16 +698,16 @@ The REST API is built with **FastAPI** (`0.165.0`) using the `create_app()` appl
 
 Implemented in `src/liver_disease/api/security.py`:
 - Uses FastAPI's `APIKeyHeader(name="X-API-Key", auto_error=False)`.
-- Reads the expected secret strictly from the `LIVER_API_KEY` environment variable (loaded from `.env` via `python-dotenv` or container env; **never hardcoded**).
+- Reads the expected secret strictly from the `LIVER_API_KEY` environment variable (loaded from `.env` via `python-dotenv`; **never hardcoded**).
 - **Fail-Closed Design**: If `LIVER_API_KEY` is unset or blank on the server, `verify_api_key` returns **HTTP `503 Service Unavailable`** rather than allowing unauthenticated access.
 - **Constant-Time Verification**: Compares `provided_key.strip()` against `expected_key` using **`hmac.compare_digest()`** to prevent timing side-channel attacks. Missing or mismatched keys return **HTTP `401 Unauthorized`** with header `WWW-Authenticate: ApiKey`.
-- **Unauthenticated Endpoints**: `GET /health`, `GET /docs`, `GET /redoc`, and `GET /openapi.json` (allowing Docker/cloud health probes and developer OpenAPI inspection).
+- **Unauthenticated Endpoints**: `GET /health`, `GET /docs`, `GET /redoc`, and `GET /openapi.json` (allowing service health probes and developer OpenAPI inspection).
 - **Authenticated Endpoints**: `GET /model-info`, `POST /predict`, `POST /predict/batch`, and `POST /explain`.
 
 ### 7.3 Complete Endpoint Reference
 
 #### 1. `GET /health`
-- **Purpose**: Liveness and model-readiness probe for Docker `HEALTHCHECK`, Render, load balancers, and the Streamlit sidebar status indicator.
+- **Purpose**: Liveness and model-readiness probe for monitoring and the Streamlit sidebar status indicator.
 - **Method & Headers**: `GET` · No authentication headers required.
 - **Request Body**: None.
 - **Example Response (`200 OK`)**:
@@ -1005,8 +1005,7 @@ Antigravity/                                      # Project Root
 │       └── figures/                              # 10 publication-grade PNG charts (180 DPI)
 │
 ├── frontend/                                     # Independent Streamlit prototype UI
-│   ├── app.py                                    # HTTP-only client (Single + SHAP, Batch CSV, Model Info)
-│   └── Dockerfile                                # Lightweight container (streamlit, requests, pandas, plotly)
+│   └── app.py                                    # HTTP-only client (Single + SHAP, Batch CSV, Model Info)
 │
 ├── scripts/                                      # CLI runners to reproduce every pipeline stage
 │   ├── run_data_audit.py                         # Executes Phase 2 data audit
@@ -1033,9 +1032,6 @@ Antigravity/                                      # Project Root
 │   ├── reports/                                  # DATA_DICTIONARY.md, EXPERIMENT_REPORT.md, MODEL_CARD.md
 │   └── user_guides/                              # Liver_Disease_User_Input_Guide (.md & .pdf)
 │
-├── Dockerfile                                    # Independent FastAPI ML backend container (port 8000)
-├── docker-compose.yml                            # Multi-container orchestration (api + frontend)
-├── render.yaml                                   # Render cloud blueprint for API & optional UI
 ├── .env.example                                  # Environment variable template (no hardcoded secrets)
 ├── requirements.txt / pyproject.toml             # Dependency pins & package/pytest configuration
 └── README.md                                     # Project overview, architecture & documentation index
@@ -1072,13 +1068,13 @@ All runtime settings are configured via environment variables (templated in `.en
 | Environment Variable | Default Value | Used By | Purpose |
 | :--- | :--- | :--- | :--- |
 | **`LIVER_API_KEY`** | *(None — Required)* | FastAPI (`security.py`) & Streamlit | Shared secret expected in `X-API-Key` header. FastAPI fails closed (`503`) if unset. |
-| `API_HOST` | `0.0.0.0` | Uvicorn / Docker | Network bind interface for FastAPI. |
-| `API_PORT` | `8000` | Uvicorn / Docker | Listening TCP port for FastAPI. |
+| `API_HOST` | `127.0.0.1` | Uvicorn | Network bind interface for FastAPI. |
+| `API_PORT` | `8000` | Uvicorn | Listening TCP port for FastAPI. |
 | `LOG_LEVEL` | `INFO` | FastAPI (`main.py`) | Logging verbosity (`DEBUG`, `INFO`, `WARNING`, `ERROR`). |
 | `CORS_ALLOWED_ORIGINS` | `http://localhost:8501,http://127.0.0.1:8501` | FastAPI (`main.py`) | Comma-separated allowed browser origins. |
 | `MODEL_ARTIFACT_PATH` | `artifacts/models/liver_disease_pipeline.joblib` | FastAPI (`main.py`) | Path to serialized model bundle (relative to project root or absolute). |
 | `MAX_BATCH_ROWS` | `5000` | FastAPI (`routes.py`) | Upper row limit accepted by `POST /predict/batch`. |
-| `API_BASE_URL` | `http://localhost:8000` | Streamlit (`frontend/app.py`) | Base URL of the FastAPI server (`http://api:8000` inside Docker Compose). |
+| `API_BASE_URL` | `http://localhost:8000` | Streamlit (`frontend/app.py`) | Base URL of the FastAPI server. |
 
 **Generating a Cryptographically Strong API Key (PowerShell):**
 ```powershell
@@ -1104,17 +1100,10 @@ $env:LIVER_API_KEY="your-strong-random-api-key"
 .venv\Scripts\streamlit.exe run frontend\app.py --server.port 8501
 ```
 
-**Containerized Execution (Docker & Docker Compose):**
-- **Both services together**: Run `docker compose up --build -d` (FastAPI on port `8000`, Streamlit on port `8501` reaching FastAPI over Docker's internal bridge network at `http://api:8000`, waiting for `/health` to pass).
-- **ML API container alone (for external Backend teams)**:
-
-```bash
-docker build -t liver-disease-api:1.0.0 .
-docker run -d --name liver-disease-api -p 8000:8000 \
-  -e LIVER_API_KEY="your-strong-secret" \
-  -e CORS_ALLOWED_ORIGINS="https://your-backend.example.com" \
-  liver-disease-api:1.0.0
-```
+**Direct Host Execution:**
+- Run FastAPI on port `8000`.
+- Run Streamlit on port `8501`.
+- Configure `API_BASE_URL=http://127.0.0.1:8000` in the frontend environment.
 
 ### 10.3 Testing the API
 
@@ -1160,13 +1149,13 @@ To maintain full transparency between what is already built in this repository a
 | **Implemented** | FastAPI REST Microservice & Pydantic v2 Contracts | All 6 endpoints (`/health`, `/docs`, `/model-info`, `/predict`, `/predict/batch`, `/explain`), lifespan loader, CORS, timing logs. |
 | **Implemented** | Constant-Time API Key Security | `X-API-Key` + `hmac.compare_digest()` + fail-closed `503` when `LIVER_API_KEY` is missing. |
 | **Implemented** | Decoupled Streamlit Prototype UI | HTTP-only frontend supporting manual input, presets, probability gauge, SHAP chart, CSV upload/download. |
-| **Implemented** | Independent Dockerfiles, Compose & Render Blueprint | Root `Dockerfile` (non-root `appuser`, `HEALTHCHECK`), `frontend/Dockerfile`, `docker-compose.yml`, `render.yaml`. |
+| **Implemented** | Direct Host Local Deployment | FastAPI and Streamlit can run independently on host ports `8000` and `8501`. |
 | **Implemented** | Automated QA & Live Smoke Suite | 6 `pytest` modules (`tests/`) + live Uvicorn verification script (`scripts/verify_live_api.py`). |
-| **Planned / Remaining** | Live Cloud Hosting & Provisioning | Deploying containers to a live cloud provider (e.g., Render, Railway, AWS App Runner, Azure Container Apps) and setting production `LIVER_API_KEY` & restricted `CORS_ALLOWED_ORIGINS` (note `render.yaml` currently sets `CORS_ALLOWED_ORIGINS: "*"` as a demo placeholder — must be tightened for production). |
+| **Planned / Remaining** | Live Cloud Hosting & Provisioning | Publishing the services to a supported host and setting production `LIVER_API_KEY` and restricted `CORS_ALLOWED_ORIGINS`. |
 | **Planned / Remaining** | HTTPS / TLS Termination | Configuring reverse proxy / cloud TLS certificates so `X-API-Key` and patient lab data never travel over plaintext HTTP. |
 | **Planned / Remaining** | Rate Limiting & Abuse Protection | Adding per-IP/per-key rate limiting (e.g., API gateway, Nginx, or `slowapi`) especially to protect CPU-bound `POST /explain` and `/predict/batch`. |
 | **Planned / Remaining** | Persistent Audit Logging & Monitoring | Forwarding structured logs, latency metrics, error rates, and feature-distribution drift monitors to a database/observability stack (Prometheus/Grafana/Datadog). |
-| **Planned / Remaining** | CI/CD Pipeline & Multi-Worker Scaling | Automating `pytest` + Docker build on Git push (GitHub Actions) and configuring multiple Uvicorn/Gunicorn workers for concurrent traffic. |
+| **Planned / Remaining** | CI/CD Pipeline & Multi-Worker Scaling | Automating `pytest` on Git push (GitHub Actions) and configuring multiple Uvicorn/Gunicorn workers for concurrent traffic. |
 | **Planned / Remaining** | Clinical Validation & Regulatory Compliance | Mandatory prospective multi-center clinical trials, demographic re-calibration, and HIPAA/GDPR/FDA compliance **before** any real-world healthcare use. |
 
 ---
@@ -1266,13 +1255,13 @@ Below are **30 technical questions and detailed answers** covering every stage o
 ### FastAPI, Security & Model Serialization
 
 **Q23. Why did you choose FastAPI over Flask, and why did you decouple Streamlit from the ML model?**  
-*Answer:* FastAPI provides native Pydantic v2 request/response validation, automatic Swagger UI (`/docs`) and OpenAPI JSON (`/openapi.json`) generation for external backend teams, async lifespan hooks for one-time model loading, and high performance via Starlette/Uvicorn. Decoupling Streamlit (`frontend/app.py` communicates strictly over HTTP with zero ML packages in `frontend/Dockerfile`) ensures the ML API is a standalone microservice reusable by any web, mobile, or hospital-research backend without duplicating inference logic.
+*Answer:* FastAPI provides native Pydantic v2 request/response validation, automatic Swagger UI (`/docs`) and OpenAPI JSON (`/openapi.json`) generation for external backend teams, async lifespan hooks for one-time model loading, and high performance via Starlette/Uvicorn. Decoupling Streamlit (`frontend/app.py` communicates strictly over HTTP with no ML packages) ensures the ML API is a standalone microservice reusable by any web, mobile, or hospital-research backend without duplicating inference logic.
 
 **Q24. How does your API authentication protect against hardcoded secrets, timing attacks, and misconfigured servers?**  
 *Answer:* In `src/liver_disease/api/security.py`, `LIVER_API_KEY` is read strictly from environment variables (`.env` is gitignored). Verification uses `hmac.compare_digest()` so comparison time does not leak key characters via timing side-channels. If `LIVER_API_KEY` is accidentally left unset on the server, the API **fails closed** with HTTP `503 Service Unavailable` instead of running unprotected.
 
 **Q25. Why is the trained model saved as a single `joblib` bundle, and why does the API refuse to retrain on startup if the file is missing?**  
-*Answer:* `artifacts/models/liver_disease_pipeline.joblib` atomically bundles the fitted preprocessor, ensemble classifier, decision threshold (`0.57`), risk thresholds, transformed feature names, SHAP background array, model version (`1.0.0`), and evaluation metadata—preventing version mismatch between preprocessor and model. Refusing to retrain at startup guarantees deterministic, auditable, fast container boot times, prevents silent model drift in production, and ensures the API container doesn't need raw training datasets (`Dockerfile` copies only `src/` and `artifacts/models/`).
+*Answer:* `artifacts/models/liver_disease_pipeline.joblib` atomically bundles the fitted preprocessor, ensemble classifier, decision threshold (`0.57`), risk thresholds, transformed feature names, SHAP background array, model version (`1.0.0`), and evaluation metadata—preventing version mismatch between preprocessor and model. Refusing to retrain at startup guarantees deterministic, auditable, fast service startup, prevents silent model drift in production, and avoids requiring raw training datasets at runtime.
 
 ### Inference Pipeline & API Integration
 
@@ -1291,4 +1280,4 @@ Below are **30 technical questions and detailed answers** covering every stage o
 *Answer:* I would advise **strongly against** clinical deployment in its current form. This system is an academic ML engineering prototype trained on `570` patients from a single regional clinic in 2012, with `18.5%` holdout false negatives, `48.5%` holdout false positives, `75.6%` male skew, and no external validation. Real clinical deployment would require a large, multi-center, demographically balanced prospective dataset, inclusion of clinical history/viral serology/imaging, recalibration to target population prevalence, prospective clinical trials, clinician-in-the-loop workflow design, and regulatory clearance (FDA/CE/local health authority).
 
 **Q30. What concrete improvements would you prioritize in Version 2.0 of this project?**  
-*Answer:* (1) **Data & Modeling**: Train and externally validate on larger multi-center clinical cohorts with longitudinal lab trends, disease subtype labels, and cross-field physiological validation rules (e.g., flagging `DB > TB` or `ALB > TP` warnings); (2) **Engineering & MLOps**: Add automated CI/CD (GitHub Actions running `pytest` + Docker builds), API rate limiting and async worker queues for SHAP `/explain`, persistent prediction audit storage using `prediction_id`, and automated data-drift monitoring on incoming LFT distributions.
+*Answer:* (1) **Data & Modeling**: Train and externally validate on larger multi-center clinical cohorts with longitudinal lab trends, disease subtype labels, and cross-field physiological validation rules (e.g., flagging `DB > TB` or `ALB > TP` warnings); (2) **Engineering & MLOps**: Add automated CI/CD (GitHub Actions running `pytest`), API rate limiting and async worker queues for SHAP `/explain`, persistent prediction audit storage using `prediction_id`, and automated data-drift monitoring on incoming LFT distributions.

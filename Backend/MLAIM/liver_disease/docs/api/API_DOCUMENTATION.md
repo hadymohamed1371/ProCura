@@ -23,7 +23,7 @@ All endpoints except `/health`, `/docs`, `/redoc`, and `/openapi.json` require t
 
 ### 1. `GET /health`
 
-Health and model readiness probe (unauthenticated for load balancers / Docker `HEALTHCHECK`).
+Health and model readiness probe (unauthenticated).
 
 **Response (`200 OK`)**:
 ```json

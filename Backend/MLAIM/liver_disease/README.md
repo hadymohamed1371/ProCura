@@ -16,7 +16,7 @@ A modular, reproducible, backend-ready **Machine Learning Engineering** graduati
 - **Explainable AI (SHAP)**: Global importance rankings, beeswarm/bar plots, and live individual patient SHAP explanations via `POST /explain`.
 - **Backend-Ready FastAPI Service**: `GET /health`, `GET /model-info`, `POST /predict`, `POST /predict/batch` (CSV upload), `POST /explain`, Swagger UI (`/docs`), constant-time `X-API-Key` authentication from environment variables, strict Pydantic v2 validation, and zero retraining at startup.
 - **Independent Streamlit Prototype**: Communicates exclusively with FastAPI over HTTP (zero duplicated inference code), supporting individual patient inputs, probability gauges, SHAP charts, batch CSV upload, and CSV download.
-- **Automated QA & Deployment**: Comprehensive `pytest` suite (`tests/`), executed experimentation notebooks (`notebooks/01`–`05`), independent Dockerfiles, `docker-compose.yml`, and `render.yaml`.
+- **Automated QA & Local Operation**: Comprehensive `pytest` suite (`tests/`), executed experimentation notebooks (`notebooks/01`–`05`), and direct FastAPI and Streamlit startup instructions.
 
 ---
 
@@ -41,20 +41,16 @@ A modular, reproducible, backend-ready **Machine Learning Engineering** graduati
 │   ├── preprocessing/        # preprocessing_schema.json
 │   └── reports/              # Audit/EDA/Benchmark/Evaluation JSONs, CSVs, and figures/
 ├── frontend/
-│   ├── app.py                # Streamlit UI (HTTP-only client to FastAPI)
-│   └── Dockerfile            # Independent UI container
+│   └── app.py                # Streamlit UI (HTTP-only client to FastAPI)
 ├── tests/                    # Unit, preprocessing, model, prediction, API, security tests
 ├── scripts/                  # Reproducible CLI runners for every pipeline phase
 ├── docs/
 │   ├── api/                  # REST API contract (API_DOCUMENTATION.md)
 │   ├── architecture/         # Complete system architecture & code-verified audit (MD + PDF)
-│   ├── deployment/           # Local, Docker, and cloud deployment guide (DEPLOYMENT_GUIDE.md)
+│   ├── deployment/           # Local deployment guide (DEPLOYMENT_GUIDE.md)
 │   ├── integration/          # Backend integration guide & Python client
 │   ├── reports/              # DATA_DICTIONARY.md, EXPERIMENT_REPORT.md, MODEL_CARD.md
 │   └── user_guides/          # End-user input & integration guide (MD + PDF)
-├── Dockerfile                # Independent FastAPI backend container
-├── docker-compose.yml        # Full-stack local orchestration
-├── render.yaml               # Python hosting platform deployment blueprint
 ├── .env.example              # Environment variable template (no hardcoded secrets)
 ├── pyproject.toml            # Packaging metadata & pytest configuration
 └── requirements.txt          # Pinned runtime & testing dependencies
@@ -69,7 +65,7 @@ A modular, reproducible, backend-ready **Machine Learning Engineering** graduati
 | **ML Engineer** | `src/liver_disease/{data,features,models}/`, `notebooks/`, `scripts/` | [EXPERIMENT_REPORT.md](docs/reports/EXPERIMENT_REPORT.md), [MODEL_CARD.md](docs/reports/MODEL_CARD.md), [DATA_DICTIONARY.md](docs/reports/DATA_DICTIONARY.md) |
 | **Backend Developer** | `src/liver_disease/api/` | [API_DOCUMENTATION.md](docs/api/API_DOCUMENTATION.md), [BACKEND_INTEGRATION_GUIDE.md](docs/integration/BACKEND_INTEGRATION_GUIDE.md) |
 | **Frontend Developer** | `frontend/` (`app.py`, zero ML deps) | [Liver_Disease_User_Input_Guide.md](docs/user_guides/Liver_Disease_User_Input_Guide.md) |
-| **DevOps / MLOps** | `Dockerfile`, `frontend/Dockerfile`, `docker-compose.yml`, `render.yaml` | [DEPLOYMENT_GUIDE.md](docs/deployment/DEPLOYMENT_GUIDE.md), [Complete Architecture Guide](docs/architecture/Liver_Disease_ML_Project_Complete_Explanation.md) |
+| **DevOps / MLOps** | Local services, environment configuration, testing | [DEPLOYMENT_GUIDE.md](docs/deployment/DEPLOYMENT_GUIDE.md), [Complete Architecture Guide](docs/architecture/Liver_Disease_ML_Project_Complete_Explanation.md) |
 
 ---
 
@@ -125,7 +121,7 @@ Open `http://localhost:8501`.
 | [MODEL_CARD.md](docs/reports/MODEL_CARD.md) | Final model overview, 95% bootstrap CIs, limitations, bias & ethics |
 | [API_DOCUMENTATION.md](docs/api/API_DOCUMENTATION.md) | Complete FastAPI endpoint reference, schemas, error codes |
 | [BACKEND_INTEGRATION_GUIDE.md](docs/integration/BACKEND_INTEGRATION_GUIDE.md) | Production Python `requests` client, `curl`, Postman setup |
-| [DEPLOYMENT_GUIDE.md](docs/deployment/DEPLOYMENT_GUIDE.md) | Local, Docker Compose, and cloud (Render/Railway/Fly) deployment |
+| [DEPLOYMENT_GUIDE.md](docs/deployment/DEPLOYMENT_GUIDE.md) | Local FastAPI and Streamlit deployment |
 | [Liver_Disease_User_Input_Guide.md](docs/user_guides/Liver_Disease_User_Input_Guide.md) ([PDF](docs/user_guides/Liver_Disease_User_Input_Guide.pdf)) | Exact 10 user inputs, units, validation rules, and UI/API mapping |
 | [Liver_Disease_ML_Project_Complete_Explanation.md](docs/architecture/Liver_Disease_ML_Project_Complete_Explanation.md) ([PDF](docs/architecture/Liver_Disease_ML_Project_Complete_Explanation.pdf)) | End-to-end architecture, ML theory, API design, and walkthrough |
 | [Liver_Disease_ML_Project_Code_Verified_Audit.md](docs/architecture/Liver_Disease_ML_Project_Code_Verified_Audit.md) ([PDF](docs/architecture/Liver_Disease_ML_Project_Code_Verified_Audit.pdf)) | Source-code-verified technical audit, handover matrix, and 35 Q&As |

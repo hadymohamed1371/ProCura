@@ -533,7 +533,7 @@ def generate_advice(prediction: Mapping, patient_data: Mapping | None = None, la
 
 def predict_with_advice(patient_data, language: str = "en", **kwargs):
     """predict_risk() plus AI advice. Accepts one patient (dict) or several (list / DataFrame)."""
-    from MLAIM.production.predict import predict_risk   # imported lazily: advisor itself has no ML dependencies
+    from production.predict import predict_risk   # imported lazily: advisor itself has no ML dependencies
 
     result = predict_risk(patient_data)
     if isinstance(result, list):

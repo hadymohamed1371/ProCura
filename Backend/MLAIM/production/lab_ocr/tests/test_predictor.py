@@ -1,8 +1,8 @@
 import json
 import pytest
-from MLAIM.production.lab_ocr.exceptions import PredictionError
-from MLAIM.production.lab_ocr.prediction import ModelSpec, RiskPredictor
-from MLAIM.production.lab_ocr.tests.conftest import make_result
+from lab_ocr.exceptions import PredictionError
+from lab_ocr.prediction import ModelSpec, RiskPredictor
+from conftest import make_result
 
 
 def test_predicts_with_reviewed_values(predictor, make_report):

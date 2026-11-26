@@ -12,7 +12,7 @@ External Backend / Client App
         │  HTTPS + Header: X-API-Key: <SECRET>
         ▼
 FastAPI ML Microservice (port 8000)
-  ├── GET  /health           (No auth — container/load-balancer readiness probe)
+  ├── GET  /health           (No auth — service readiness probe)
   ├── GET  /model-info       (Auth required — schema, units, metrics, version)
   ├── POST /predict          (Auth required — single patient prediction)
   ├── POST /predict/batch    (Auth required — CSV upload batch predictions)
@@ -20,7 +20,7 @@ FastAPI ML Microservice (port 8000)
   └── GET  /docs             (Interactive Swagger UI)
 ```
 
-- The ML service is **stateless** and **independently deployable** (`Dockerfile`).
+- The ML service is **stateless** and **independently deployable**.
 - It loads the frozen, versioned inference artifact (`liver_disease_pipeline.joblib`) once on startup and **never retrains at runtime**.
 - Every prediction response returns a unique `prediction_id` (UUID v4) and `model_version` for audit logging in your primary database.
 
