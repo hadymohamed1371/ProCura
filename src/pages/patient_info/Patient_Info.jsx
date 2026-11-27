@@ -67,11 +67,30 @@ export default function Patient_Info({ onSave }) {
                 },
             }
 
-            const existingId = localStorage.getItem('procuraPatientId')
+            let existingId = localStorage.getItem('procuraPatientId')
+            if (!/^[a-f\d]{24}$/i.test(existingId ?? '')) {
+                if (existingId) {
+                    localStorage.removeItem('procuraPatientId')
+                }
+                const { patients } = await apiRequest('/patients', { token })
+                const latestPatientId = patients[0]?._id ?? patients[0]?.id
+                if (typeof latestPatientId === 'string' && /^[a-f\d]{24}$/i.test(latestPatientId)) {
+                    existingId = latestPatientId
+                } else {
+                    existingId = null
+                }
+            }
+            if (!existingId) {
+                localStorage.removeItem('procuraPatientId')
+            }
             const result = existingId
                 ? await apiRequest(`/patients/${existingId}`, { method: 'PUT', token, body: JSON.stringify(payload) })
                 : await apiRequest('/patients', { method: 'POST', token, body: JSON.stringify(payload) })
-            localStorage.setItem('procuraPatientId', result.patient.id)
+            const patientId = result.patient?._id ?? result.patient?.id
+            if (typeof patientId !== 'string' || !/^[a-f\d]{24}$/i.test(patientId)) {
+                throw new Error('Patient was saved, but the API did not return a valid patient ID.')
+            }
+            localStorage.setItem('procuraPatientId', patientId)
             onSave?.(formValues)
         } catch (requestError) {
             setError(requestError.message)

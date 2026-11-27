@@ -12,7 +12,6 @@ export default function Liver_Input() {
         <div className="liver-input-page">
             <div className="liver-sections-grid">
 
-               ]
                 <Section title="Bilirubin Tests">
                     <div className="input-fields-container">
 

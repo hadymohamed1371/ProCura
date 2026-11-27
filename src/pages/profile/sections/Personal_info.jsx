@@ -26,9 +26,9 @@ useEffect(() => {
         : '12 March, 2002'
       setProfile({
         dateOfBirth: dob,
-        gender: p.gender ?? 'Female',
-        height: p.heightCm ?? '165',
-        weight: p.weightKg ?? '60',
+        gender: p.gender ?? ' ',
+        height: p.heightCm ?? ' ',
+        weight: p.weightKg ?? ' ',
       })
     })
     .catch(() => {})
