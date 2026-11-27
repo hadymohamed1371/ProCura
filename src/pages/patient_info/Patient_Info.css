@@ -18,26 +18,26 @@
 }
 
 .patient-info-top-row {
-    --patient-info-disease-cell-width: max-content;
-    --patient-info-general-cell-width: max-content;
     --patient-info-column-gap: 12px;
 
     grid-area: top;
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
     align-items: stretch;
     column-gap: var(--patient-info-column-gap);
     min-width: 0;
+    width: 100%;
 }
 
 .patient-info-dynamic-cell {
-    flex: 0 1 var(--patient-info-disease-cell-width);
     min-width: 0;
+    width: 100%;
     display: flex;
 }
 
 .patient-info-general-cell {
-    flex: 0 1 var(--patient-info-general-cell-width);
     min-width: 0;
+    width: 100%;
     display: flex;
 }
 
@@ -92,7 +92,8 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     font-size: 16px;
-    width: 300px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .mini-input-field {

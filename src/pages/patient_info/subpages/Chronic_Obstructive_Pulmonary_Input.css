@@ -1,4 +1,4 @@
-@import '../../../App.css';
+/* @import '../../../App.css';
 @import '../Patient_Info.css';
 
 
@@ -76,4 +76,70 @@
 .copd-general-health {
     width: 100%;
     margin-top: 25px;
+} */
+@import '../../../App.css';
+@import '../Patient_Info.css';
+
+.copd-input-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.copd-input-page > * {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.copd-input-page .input-fields-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.copd-input-page .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.copd-input-page .label-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    min-width: 0;
+}
+
+.copd-input-page .input-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-blue);
+}
+
+.copd-input-page .input-field {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.copd-input-page .description {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.136);
+    margin-top: 5px;
+}
+
+.copd-general-health {
+    width: 100%;
 }

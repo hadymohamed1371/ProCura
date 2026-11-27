@@ -14,7 +14,7 @@ export default function Diabetes_Input() {
             <div className="diabetes-sections-grid">
 
                
-                <Section title="Medical Conditions">
+                <Section title="Diabetes">
                     <div className="input-fields-container">
 
                        
@@ -57,17 +57,7 @@ export default function Diabetes_Input() {
                         </div>
 
                        
-                        <div className="input-container">
-                            <div className="label-input">
-                                <label htmlFor="diabetes-smoker" className="input-label">Smoking Status:</label>
-                                <select id="diabetes-smoker" name="diabetes:Smoker" className="input-field" value={formValues['diabetes:Smoker'] ?? ''} onChange={handleInputChange}>
-                                    <option value="">Select an Option</option>
-                                    <option value="0">No</option>
-                                    <option value="1">Yes</option>
-                                </select>
-                            </div>
-                            <p className="description">Indicates whether the patient has smoked at least 100 cigarettes in their lifetime.</p>
-                        </div>
+                    
 
                        
                         <div className="input-container">
@@ -197,20 +187,7 @@ export default function Diabetes_Input() {
                         </div>
 
                        
-                        <div className="input-container">
-                            <div className="label-input">
-                                <label htmlFor="diabetes-genhlth" className="input-label">General Health:</label>
-                                <select id="diabetes-genhlth" name="diabetes:GenHlth" className="input-field" value={formValues['diabetes:GenHlth'] ?? ''} onChange={handleInputChange}>
-                                    <option value="">Select General Health</option>
-                                    <option value="1">Excellent</option>
-                                    <option value="2">Very Good</option>
-                                    <option value="3">Good</option>
-                                    <option value="4">Fair</option>
-                                    <option value="5">Poor</option>
-                                </select>
-                            </div>
-                            <p className="description">Patient's overall health condition, ranging from excellent to poor.</p>
-                        </div>
+                  
 
                        
                         <div className="input-container">
@@ -251,18 +228,7 @@ export default function Diabetes_Input() {
                     <div className="input-fields-container">
 
                         {/* Sex */}
-                        <div className="input-container">
-                            <div className="label-input">
-                                <label htmlFor="diabetes-sex" className="input-label">Sex:</label>
-                                <select id="diabetes-sex" name="diabetes:Sex" className="input-field" value={formValues['diabetes:Sex'] ?? ''} onChange={handleInputChange}>
-                                    <option value="">Select Sex</option>
-                                    <option value="0">Female</option>
-                                    <option value="1">Male</option>
-                                </select>
-                            </div>
-                            <p className="description">Biological sex recorded for the patient.</p>
-                        </div>
-
+                       
                       
                         <div className="input-container">
                             <div className="label-input">

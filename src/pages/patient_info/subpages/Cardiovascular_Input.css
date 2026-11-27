@@ -1,58 +1,67 @@
+
 @import '../../../App.css';
 @import '../Patient_Info.css';
 
-
 .cardiovascular-input-page {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.cardiovascular-sections-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-rows: 1fr;
-    gap: 25px;
+.cardiovascular-input-page > * {
     width: 100%;
-    align-items: stretch;
-}
-
-.cardiovascular-sections-grid > * {
-    width: 100%;
-    height: 100%;
     min-width: 0;
     box-sizing: border-box;
 }
 
-.cardiovascular-sections-grid .input-fields-container {
+
+.cardiovascular-section-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
     width: 100%;
+    align-items: stretch;
 }
 
-.cardiovascular-sections-grid .input-container {
+.cardiovascular-cholesterol-column {
+    min-width: 0;
+    width: 100%;
+}
+
+.cardiovascular-input-page .input-fields-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+.cardiovascular-input-page .input-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
     min-width: 0;
 }
 
-.cardiovascular-sections-grid .label-input {
+.cardiovascular-input-page .label-input {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    width: 100%;
     min-width: 0;
 }
 
-.cardiovascular-sections-grid .input-label {
+.cardiovascular-input-page .input-label {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 700;
     color: var(--color-blue);
 }
 
-.cardiovascular-sections-grid .input-field {
+.cardiovascular-input-page .input-field {
     width: 100%;
     max-width: 100%;
+    min-width: 0;
     box-sizing: border-box;
     padding: 15px;
     border: 1px solid #ccc;
@@ -60,7 +69,7 @@
     font-size: 16px;
 }
 
-.cardiovascular-sections-grid .description {
+.cardiovascular-input-page .description {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 300;
@@ -68,12 +77,88 @@
     margin-top: 5px;
 }
 
-@media (max-width: 900px) {
-    .cardiovascular-sections-grid {
-        grid-template-columns: 1fr;
-    }
+
+.cardiovascular-profile-notice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #f0f7ff;
+    border: 1px solid #d6e8fa;
+    border-radius: 12px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
+
+.cardiovascular-notice-icon {
+    font-size: 23px;
+    color: #2878bd;
+    flex-shrink: 0;
+}
+
+.cardiovascular-notice-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.cardiovascular-notice-content h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #245b87;
+}
+
+.cardiovascular-notice-content p {
+    margin: 0 0 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #52677a;
+}
+
+.cardiovascular-profile-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #2878bd;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cardiovascular-profile-button:hover {
+    background: #1c5f98;
+}
+
+
 .cardiovascular-general-health {
     width: 100%;
-    margin-top: 25px;
+    min-width: 0;
+}
+
+.cardiovascular-general-health .input-fields-container {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 600px), 1fr)
+    );
+    gap: 20px;
+    width: 100%;
+}
+
+
+@media (max-width: 900px) {
+    .cardiovascular-section-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .cardiovascular-profile-notice {
+        padding: 12px;
+    }
 }
