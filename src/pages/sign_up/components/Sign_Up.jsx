@@ -10,25 +10,45 @@ import ProCura_banner from "../../../assets/logos/ProCura_banner.svg"
 import About from '../../landing/sections/components/About'
 import Features from '../../landing/sections/components/Features'
 import Footer from '../../../components/footer/components/Footer'
+import { apiRequest } from '../../../lib/api'
 
 export default function Sign_Up() {
 
     const navigate = useNavigate()
 
-    const handleSubmit = (e) => {
+    const [error, setError] = React.useState('')
+    const [submitting, setSubmitting] = React.useState(false)
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        setError('')
 
         const formData = new FormData(e.target)
 
         const password = formData.get('password')
         const confirmPassword = formData.get('confirmPassword')
+        const fullName = formData.get('fullName')
+        const email = formData.get('email')
 
         if (password !== confirmPassword) {
             alert('Passwords do not match!')
             return
         }
 
-        alert('Account Created!')
+        setSubmitting(true)
+        try {
+            const result = await apiRequest('/auth/register', {
+                method: 'POST',
+                body: JSON.stringify({ name: fullName, email, password }),
+            })
+            localStorage.setItem('authToken', result.token)
+            localStorage.setItem('authUser', JSON.stringify(result.user))
+            navigate('/dashboard')
+        } catch (requestError) {
+            setError(requestError.message)
+        } finally {
+            setSubmitting(false)
+        }
     }
 
     return (
@@ -111,7 +131,7 @@ export default function Sign_Up() {
                             name="password"
                             placeholder="Password"
                             autoComplete="new-password"
-                            minLength="8"
+                            minLength="12"
                             required
                         />
 
@@ -120,15 +140,17 @@ export default function Sign_Up() {
                             name="confirmPassword"
                             placeholder="Confirm Password"
                             autoComplete="new-password"
-                            minLength="8"
+                            minLength="12"
                             required
                         />
 
+                        {error && <p role="alert" style={{ color: '#b91c1c', margin: 0 }}>{error}</p>}
                         <button
                             type="submit"
                             className="signup-submit"
+                            disabled={submitting}
                         >
-                            Create Account
+                            {submitting ? 'Creating Account...' : 'Create Account'}
                         </button>
 
                     </form>

@@ -40,7 +40,10 @@
     display: flex;
     gap: 20px;
 }
-
+.location{
+    display: flex;
+    gap: 20px;
+}
 .patient-name {
     margin: 0;
     font-size: 40px;

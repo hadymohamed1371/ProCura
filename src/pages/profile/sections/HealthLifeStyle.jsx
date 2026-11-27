@@ -6,6 +6,7 @@ import Profile_ActivityLevel from "../../../assets/icons/Profile_ActivityLevel.s
 import Profile_Smoking_Health from "../../../assets/icons/Profile_Smoking_Health.svg";
 import Profile_Alcohol_Health from "../../../assets/icons/Profile_Alcohol_Health.svg";
 import Profile_Medical_Health from "../../../assets/icons/Profile_Medical_Health.svg"
+import { apiRequest } from '../../../lib/api'
 
 export default function HealthLifeStyle() {
     const [profile, setProfile] = useState({
@@ -16,11 +17,19 @@ export default function HealthLifeStyle() {
     });
 
 useEffect(() => {
-  const savedProfile = localStorage.getItem("profileData");
-
-  if (savedProfile) {
-    setProfile(JSON.parse(savedProfile));
-  }
+  const token = localStorage.getItem('authToken')
+  if (!token) return
+  apiRequest('/auth/me', { token })
+    .then(({ user }) => {
+      const p = user.profile ?? {}
+      setProfile({
+        activityLevel: p.activityLevel ?? 'Moderate',
+        smokingStatus: p.smokingStatus ?? 'No',
+        alcoholStatus: p.alcoholStatus ?? 'No',
+        medicalCondition: p.medicalCondition ?? 'None',
+      })
+    })
+    .catch(() => {})
 }, []);
     return (
          <div className='health-section'>

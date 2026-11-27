@@ -2,6 +2,8 @@
 
 ProCura is a React application built with Vite. It includes a landing page, dashboard, patient information, profile, settings, and a shared application layout.
 
+The sign-in and sign-up pages use the Express API in `Backend/`. Successful registration/login returns a JWT; the frontend uses that token for protected profile and patient-record requests. Account and profile information, plus saved patient health inputs, are persisted by the backend in MongoDB. The token and the current patient-record ID are stored in browser storage for API access; they are not the database records themselves.
+
 ## Requirements
 
 - [Node.js](https://nodejs.org/) (npm is included)
@@ -25,6 +27,16 @@ Vite prints the local URL in the terminal. To check a production build or run th
 npm run build
 npm run lint
 ```
+
+## Backend connection
+
+Start MongoDB and the backend API by following [the Backend README](../Backend/README.md). In this frontend folder, create `.env` or `.env.local` with the API base URL:
+
+```env
+VITE_API_BASE_URL=http://localhost:5000/api
+```
+
+Restart Vite after changing environment variables. Sign up or sign in to receive a token, then save profile changes or patient information using the existing forms. Patient-info values are sent to the backend only when **Save Data** is selected. Risk evaluations are currently an API capability; the dashboard does not yet call the evaluation endpoint.
 
 ## Project structure
 

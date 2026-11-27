@@ -9,24 +9,40 @@ import About from '../../landing/sections/components/About'
 import Features from '../../landing/sections/components/Features'
 import Footer from '../../../components/footer/components/Footer'
 import ProCura_banner from "../../../assets/logos/ProCura_banner.svg"
+import { apiRequest } from '../../../lib/api'
 export default function Sign_In() {
 
     const navigate = useNavigate()
 
     const [rememberMe, setRememberMe] = useState(false)
 
-    const handleSubmit = (e) => {
+    const [error, setError] = useState('')
+    const [submitting, setSubmitting] = useState(false)
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        setError('')
+        setSubmitting(true)
 
         const formData = new FormData(e.target)
 
         const email = formData.get('email')
         const password = formData.get('password')
 
-        // TODO: replace with the real sign-in request when the backend is ready
-        console.log({ email, password, rememberMe })
-
-        navigate('/dashboard')
+        try {
+            const result = await apiRequest('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+            })
+            localStorage.setItem('authToken', result.token)
+            localStorage.setItem('authUser', JSON.stringify(result.user))
+            if (!rememberMe) sessionStorage.setItem('authToken', result.token)
+            navigate('/dashboard')
+        } catch (requestError) {
+            setError(requestError.message)
+        } finally {
+            setSubmitting(false)
+        }
     }
 
     return (<div>
@@ -119,8 +135,9 @@ export default function Sign_In() {
     
                         </div>
     
-                        <button type="submit" className="signin-submit">
-                            Sign In
+                        {error && <p role="alert" style={{ color: '#b91c1c', margin: 0 }}>{error}</p>}
+                        <button type="submit" className="signin-submit" disabled={submitting}>
+                            {submitting ? 'Signing In...' : 'Sign In'}
                         </button>
     
                     </form>

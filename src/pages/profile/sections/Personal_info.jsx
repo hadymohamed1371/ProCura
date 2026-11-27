@@ -6,20 +6,32 @@ import Profile_Gender from "../../../assets/icons/Profile_Gender.svg"
 import Profile_Date from "../../../assets/icons/Profile_Date.svg"
 import Profile_Height from "../../../assets/icons/Profile_Height.svg"
 import Profile_Weight from "../../../assets/icons/Profile_Weight.svg"
+import { apiRequest } from '../../../lib/api'
 export default function Personal_info() {
   const [profile, setProfile] = useState({
-  dateOfBirth: "12 March, 2002",
-  gender: "Female",
-  height: "165",
-  weight: "60",
+  dateOfBirth: " ",
+  gender: " ",
+  height: " ",
+  weight: " ",
 });
 
 useEffect(() => {
-  const savedProfile = localStorage.getItem("profileData");
-
-  if (savedProfile) {
-    setProfile(JSON.parse(savedProfile));
-  }
+  const token = localStorage.getItem('authToken')
+  if (!token) return
+  apiRequest('/auth/me', { token })
+    .then(({ user }) => {
+      const p = user.profile ?? {}
+      const dob = p.dateOfBirth
+        ? new Date(p.dateOfBirth).toLocaleDateString('en-GB', { day: '2-digit', month: 'long', year: 'numeric' })
+        : '12 March, 2002'
+      setProfile({
+        dateOfBirth: dob,
+        gender: p.gender ?? 'Female',
+        height: p.heightCm ?? '165',
+        weight: p.weightKg ?? '60',
+      })
+    })
+    .catch(() => {})
 }, []);
   return (
    <div className='personal-section'>
