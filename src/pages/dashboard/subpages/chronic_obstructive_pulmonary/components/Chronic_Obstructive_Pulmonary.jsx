@@ -1,8 +1,8 @@
 import React from 'react'
 
-import '../stylesheets/Chronic_Obstructive_Pulmonary.css'
+import '../../../Dashboard.css'
 
-import Section from '../../../../components/section/Section'
+import Section from '../../../../../components/section/Section'
 
 export default function Chronic_Obstructive_Pulmonary() {
     return (

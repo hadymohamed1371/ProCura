@@ -1,11 +1,11 @@
 import React from 'react'
 
-import '../../stylesheets/general/Heart_Rate.css'
+import '../../../../Dashboard.css'
 
-import Section from '../../../../../components/section/Section'
-import Vital from '../../../../../components/vital/components/Vital'
-import Heart_Rate_icon from '../../../../../assets/icons/Heart_Rate_icon.svg'
-import Heart_Rate_Card_Curve from '../../../../../assets/images/Heart_Rate_Card_Curve.svg'
+import Section from '../../../../../../components/section/Section'
+import Vital from '../../../../../../components/vital/components/Vital'
+import Heart_Rate_icon from '../../../../../../assets/icons/Heart_Rate_icon.svg'
+import Heart_Rate_Card_Curve from '../../../../../../assets/images/Heart_Rate_Card_Curve.svg'
 
 export default function Heart_Rate() {
     return (

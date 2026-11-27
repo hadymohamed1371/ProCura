@@ -190,12 +190,6 @@ export default function Sign_Up() {
 
             </div>
 
-            <About id="about" />
-
-            <Features id="features" />
-
-            <Footer />
-
         </div>
     )
 }

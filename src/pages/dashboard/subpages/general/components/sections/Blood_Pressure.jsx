@@ -1,12 +1,12 @@
 import React from 'react'
 
-import '../../stylesheets/general/Blood_Pressure.css'
+import '../../../../Dashboard.css'
 
-import Section from '../../../../../components/section/Section'
-import Vital from '../../../../../components/vital/components/Vital'
+import Section from '../../../../../../components/section/Section'
+import Vital from '../../../../../../components/vital/components/Vital'
 
-import Blood_Pressure_icon from '../../../../../assets/icons/Blood_Pressure_icon.svg'
-import Blood_Pressure_Card_Curve from '../../../../../assets/images/Blood_Pressure_Card_Curve.svg'
+import Blood_Pressure_icon from '../../../../../../assets/icons/Blood_Pressure_icon.svg'
+import Blood_Pressure_Card_Curve from '../../../../../../assets/images/Blood_Pressure_Card_Curve.svg'
 
 export default function Blood_Pressure() {
     return (

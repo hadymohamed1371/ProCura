@@ -40,11 +40,11 @@ const scrollToSection = (id) => {
     <div className="landing-navbar">
         <div className="banner-container">
            <img
-    src={ProCura_banner}
-    alt="ProCura"
-    className="banner"
-    onClick={() => navigate('/get-started')}
-/>
+                src={ProCura_banner}
+                alt="ProCura"
+                className="banner"
+                onClick={() => navigate('/get-started')}
+            />
         </div>
 
        

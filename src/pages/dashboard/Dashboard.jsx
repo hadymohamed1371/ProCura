@@ -5,7 +5,7 @@ import './Dashboard.css'
 
 import Disease_Navbar from '../../components/disease_navbar/Disease_Navbar'
 
-import General from './subpages/components/General'
+import General from './subpages/general/components/General'
 
 export default function Dashboard() {
     const { pathname } = useLocation()

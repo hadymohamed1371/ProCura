@@ -1,10 +1,10 @@
 import React from 'react'
 
-import '../../stylesheets/general/Overall_Health.css'
+import './stylesheets/Overall_Health.css'
 
-import Section from '../../../../../components/section/Section'
-import Head_Title from '../../../../../components/head_title/Head_Title'
-import Badge from '../../../../../components/badge/components/Badge'
+import Section from '../../../../../../components/section/Section'
+import Head_Title from '../../../../../../components/head_title/Head_Title'
+import Badge from '../../../../../../components/badge/components/Badge'
 
 export default function Overall_Health() {
     return (

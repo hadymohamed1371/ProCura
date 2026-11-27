@@ -1,8 +1,8 @@
 import React from 'react'
 
-import '../stylesheets/Liver.css'
+import '../../../Dashboard.css'
 
-import Section from '../../../../components/section/Section'
+import Section from '../../../../../components/section/Section'
 
 export default function Liver() {
     return (

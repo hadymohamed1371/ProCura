@@ -1,6 +1,10 @@
 @import '../../../../App.css';
 @import '../../Landing_Page.css';
 
+.banner {
+    cursor: pointer;
+}
+
 .title {
     font-size: 50px;
     font-weight: 800;
