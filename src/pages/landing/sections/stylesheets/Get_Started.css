@@ -311,6 +311,7 @@
 .banner-container {
     display: flex;
     align-items: center;
+    margin-bottom: -12px;
 }
 
 .banner-container img {
@@ -356,8 +357,10 @@
     height: auto;
     display: block;
     margin: 0 auto;
+    
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
                 filter 0.6s ease;
+    
 }
 
 .get-started-photo img:hover {
@@ -371,7 +374,7 @@
     align-items: center;
     gap: 22px;
     position: relative;
-    z-index: 2;
+    z-index: 5;
     transform: none;
 }
 
