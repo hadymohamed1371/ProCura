@@ -1,7 +1,7 @@
 @import '../../../../App.css';
 @import '../../Landing_Page.css';
 
-.banner {
+/* .banner {
     cursor: pointer;
 }
 
@@ -35,9 +35,9 @@
     padding: 70px ;
     position: relative;
     overflow: hidden;
-     background-color: #E0EAFE;
+     /* background-color: #E0EAFE; */
     
-}
+/* }
 
 .title-subtitle-button-contianer {
     width: 43%;
@@ -268,5 +268,294 @@
         font-size: 12px;
     }
   
+} */
+
+
+.landing-hero-wrapper {
+    min-height: 100vh;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 10% 25%, #559DEB55, transparent 35%),
+        radial-gradient(circle at 90% 20%, #9693d955, transparent 35%),
+        radial-gradient(circle at 65% 85%, #63b39b30, transparent 30%),
+        linear-gradient(120deg, #ECF2FE, #E5EDFC, #E9EAFE);
+}
+.navbar-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0;
+    box-sizing: border-box;
 }
 
+.landing-navbar {
+    width: 90%;
+    max-width: 1150px;
+    padding: 12px 25px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.81);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: none;
+    border-radius: 40px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.banner-container {
+    display: flex;
+    align-items: center;
+}
+
+.banner-container img {
+    height: 45px;
+    width: auto;
+    cursor: pointer;
+    transform: none;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.get-started-container {
+    width: 100%;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 30px;
+    gap: 0px;
+    position: relative;
+    overflow: visible;
+    background: transparent;
+    text-align: center;
+}
+
+.get-started-photo {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -180px;
+    z-index: 2;
+}
+
+.get-started-photo img {
+    width: 100%;
+    max-width: 1100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+                filter 0.6s ease;
+}
+
+.get-started-photo img:hover {
+    transform: translateY(-20px) scale(1.04) rotate(-1deg);
+    filter: drop-shadow(0 25px 25px rgba(52, 120, 201, 0.18));
+}
+.title-subtitle-button-contianer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    position: relative;
+    z-index: 2;
+    transform: none;
+}
+
+.title-subtitle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.title {
+    color: var(--color-head-title);
+    letter-spacing: -1px;
+    font-size: 50px;
+    font-weight: 650;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.priority {
+    color: var(--color-lavander);
+}
+
+.subtitle {
+    font-size: 20px;
+    max-width: 500px;
+    width: 100%;
+    color: #626b7c;
+    line-height: 1.6;
+    margin: 12px 0 0;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.get-started-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--color-blue);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.get-started-btn img {
+    width: 15px;
+    height: 20px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.get-started-btn:hover {
+    background-color: var(--color-sky-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(49, 95, 152, 0.2);
+}
+
+.get-started-btn:hover img {
+    transform: translateX(4px);
+}
+
+.sign-in-btn {
+    padding: 14px 45px;
+    border: 1px solid var(--color-blue);
+    border-radius: 12px;
+    background-color: transparent;
+    color: var(--color-blue);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.sign-in-btn:hover {
+    background-color: var(--color-blue);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(49, 95, 152, 0.2);
+}
+
+.get-started-photo::before {
+    content: "";
+    position: absolute;
+    width: 65%;
+    height: 65%;
+    top: 20%;
+    left: 17.5%;
+    background: rgba(85, 157, 235, 0.22);
+    filter: blur(90px);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+@media (max-width: 768px) {
+    .landing-navbar {
+        min-height: 68px;
+        gap: 25px;
+        padding: 10px 20px;
+        margin-top: 18px;
+    }
+
+    .banner {
+        width: 125px;
+    }
+
+    .navbar-links {
+        gap: 5px;
+    }
+
+    .get-started-container {
+        padding: 55px 20px 35px;
+        gap: 30px;
+    }
+
+    .title {
+        font-size: 38px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        max-width: 400px;
+    }
+
+    .get-started-photo img {
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-navbar {
+        min-height: 60px;
+        gap: 12px;
+        padding: 9px 13px;
+        max-width: calc(100% - 24px);
+    }
+
+    .banner {
+        width: 100px;
+    }
+
+    .navbar-links {
+        gap: 2px;
+    }
+
+    .get-started-container {
+        padding: 45px 16px 30px;
+        gap: 25px;
+    }
+
+    .title {
+        font-size: 29px;
+    }
+
+    .subtitle {
+        font-size: 15px;
+        max-width: 300px;
+    }
+
+    .buttons-container {
+        gap: 12px;
+    }
+
+    .get-started-btn {
+        padding: 11px 16px;
+        font-size: 13px;
+    }
+
+    .sign-in-btn {
+        padding: 11px 25px;
+        font-size: 13px;
+    }
+
+    .get-started-photo img {
+        max-width: 100%;
+    }
+}
