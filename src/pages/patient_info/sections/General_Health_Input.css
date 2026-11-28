@@ -1,3 +1,4 @@
+
 @import '../../../App.css';
 @import '../Patient_Info.css';
 
@@ -5,6 +6,8 @@
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
+    display: flex;
+    flex: 1;
 }
 
 .patient-info-general-cell .input-fields-container {
@@ -14,14 +17,25 @@
     width: 100%;
 }
 
-.patient-info-general-cell .input-container,
+.patient-info-general-cell .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    min-width: 0;
+}
+
 .patient-info-general-cell .label-input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     width: 100%;
     min-width: 0;
 }
 
 .patient-info-general-cell .input-field {
     width: 100%;
+    min-width: 0;
     box-sizing: border-box;
 }
 
@@ -32,7 +46,8 @@
 }
 
 .patient-info-general-cell .mini-input-field {
-    width: 50%;
+    flex: 1;
+    width: 0;
     min-width: 0;
     box-sizing: border-box;
 }
