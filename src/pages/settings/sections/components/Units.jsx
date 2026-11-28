@@ -1,17 +1,13 @@
-import React, { useState } from "react";
-
+import Section from "../../../../components/section/Section";
+import { useSettings } from "../../../../context/SettingsContext";
 import "../stylesheets/Units.css";
 
-import Section from "../../../../components/section/Section";
-
 function Units() {
-  const [unitSystem, setUnitSystem] = useState("Metric");
-  const [heartRateUnit, setHeartRateUnit] = useState("bpm");
-  const [bloodPressureUnit, setBloodPressureUnit] = useState("mmHg");
-  const [bloodGlucoseUnit, setBloodGlucoseUnit] = useState("mg/dL");
+  const { units, updateUnit } = useSettings();
+  const { unitSystem, heartRateUnit, bloodPressureUnit, bloodGlucoseUnit } = units;
 
   const isMetric = unitSystem === "Metric";
-  const heightUnit = isMetric ? "cm" : "ft/in";
+  const heightUnit = isMetric ? "cm" : "ft / in";
   const weightUnit = isMetric ? "kg" : "lbs";
 
   return (
@@ -28,7 +24,7 @@ function Units() {
               id="units-system-select"
               className="units-select units-select-wide"
               value={unitSystem}
-              onChange={(e) => setUnitSystem(e.target.value)}
+              onChange={(e) => updateUnit("unitSystem", e.target.value)}
             >
               <option value="Metric">Metric</option>
               <option value="Imperial">Imperial</option>
@@ -45,17 +41,17 @@ function Units() {
 
         {/* Current System Units Summary */}
         <div className="units-current-summary">
-            <span className="units-current-heading">Current system units:</span>
-            <div className="units-current-values">
-                <div className="units-current-item">
-                <span className="units-current-key">Height unit:</span>{" "}
-                <span className="units-current-val">{heightUnit}</span>
-                </div>
-                <div className="units-current-item">
-                <span className="units-current-key">Weight unit:</span>{" "}
-                <span className="units-current-val">{weightUnit}</span>
-                </div>
+          <span className="units-current-heading">Current system units:</span>
+          <div className="units-current-values">
+            <div className="units-current-item">
+              <span className="units-current-key">Height unit:</span>{" "}
+              <span className="units-current-val">{heightUnit}</span>
             </div>
+            <div className="units-current-item">
+              <span className="units-current-key">Weight unit:</span>{" "}
+              <span className="units-current-val">{weightUnit}</span>
+            </div>
+          </div>
         </div>
 
         {/* Vital Signs Units List */}
@@ -68,7 +64,7 @@ function Units() {
               id="units-heart-rate-select"
               className="units-select units-select-compact"
               value={heartRateUnit}
-              onChange={(e) => setHeartRateUnit(e.target.value)}
+              onChange={(e) => updateUnit("heartRateUnit", e.target.value)}
             >
               <option value="bpm">bpm</option>
               <option value="npm">npm</option>
@@ -83,7 +79,7 @@ function Units() {
               id="units-blood-pressure-select"
               className="units-select units-select-compact"
               value={bloodPressureUnit}
-              onChange={(e) => setBloodPressureUnit(e.target.value)}
+              onChange={(e) => updateUnit("bloodPressureUnit", e.target.value)}
             >
               <option value="mmHg">mmHg</option>
               <option value="kPa">kPa</option>
@@ -98,7 +94,7 @@ function Units() {
               id="units-blood-glucose-select"
               className="units-select units-select-compact"
               value={bloodGlucoseUnit}
-              onChange={(e) => setBloodGlucoseUnit(e.target.value)}
+              onChange={(e) => updateUnit("bloodGlucoseUnit", e.target.value)}
             >
               <option value="mg/dL">mg/dL</option>
               <option value="mmol/L">mmol/L</option>

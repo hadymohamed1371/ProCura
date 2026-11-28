@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-
-import "../stylesheets/Preferences.css";
-
 import Section from "../../../../components/section/Section";
 import Language_icon from "../../../../assets/icons/Language_icon.svg";
 import Icon_sun from "../../../../assets/icons/Icon_sun.svg";
-
+import { useSettings } from "../../../../context/SettingsContext";
+import "../stylesheets/Preferences.css";
 function Preferences() {
-  const [language, setLanguage] = useState("English");
-  const [theme, setTheme] = useState("Light");
+  const { language, setLanguage, theme, setTheme } = useSettings();
 
   return (
     <Section title="Preferences">
